@@ -1,18 +1,21 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+      Welcome to Exams app!
+      {{ isAdmin }}
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import { mapState,mapGetters } from 'vuex'
 export default {
   name: "Home",
-  components: {
-    HelloWorld,
+  data(){
+    return {
+      base_url: process.env.VUE_APP_BASE_URL
+    }
+  },
+  computed:{
+    ...mapGetters('auth',['currentUser','isAdmin'])
   },
 };
 </script>
