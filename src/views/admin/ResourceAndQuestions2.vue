@@ -16,7 +16,7 @@
                 <td>
                     <span v-if="questionType.resource_types && questionType.resource_types.length">
                         <div v-for="rt,index in questionType.resource_types" :key="index">
-                            {{ rt.name }}  --- {{ rt.id }}
+                            {{ rt.name }}
                             <span v-if="qp.resource_id && qp.qresource.type_id == rt.id">✅</span>
                             <span v-else>❌</span>
                         </div>
@@ -30,7 +30,7 @@
                 </td>
                 <td>
                     Answer 
-                    <span v-if="qp.question && qp.question.asnwers.length">✅</span>
+                    <span v-if="qp.question && qp.question.answers.length">✅</span>
                     <span v-else>❌</span>
                 </td>
                 <td>

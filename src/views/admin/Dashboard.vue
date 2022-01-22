@@ -48,56 +48,56 @@
                 <td>
                     <router-link to="/admin-dashboard/level/3/type/1">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Elementary Mid","Listening") }}
+                            {{ numberOfQuestions("Elementary Mid","listening") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/4/type/1">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Elementary Final","Listening") }}
+                            {{ numberOfQuestions("Elementary Final","listening") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/5/type/1">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Mid","Listening") }}
+                            {{ numberOfQuestions("Pre-Intermediate Mid","listening") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/6/type/1">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","Listening") }}
+                            {{ numberOfQuestions("Pre-Intermediate Final","listening") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/7/type/1">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Intermediate Mid","Listening") }}
+                            {{ numberOfQuestions("Intermediate Mid","listening") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/8/type/1">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Intermediate Final","Listening") }}
+                            {{ numberOfQuestions("Intermediate Final","listening") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/9/type/1">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Upper-Intermediate Mid","Listening") }}
+                            {{ numberOfQuestions("Upper-Intermediate Mid","listening") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/10/type/1">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","Listening") }}
+                            {{ numberOfQuestions("Pre-Intermediate Final","listening") }}
                         </span>    
                     </router-link>
                 </td>
@@ -112,63 +112,63 @@
                 <td>
                     <router-link to="/admin-dashboard/level/2/type/2">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Beginner Final","Reading") }}
+                            {{ numberOfQuestions("Beginner Final","reading") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/3/type/2">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Elementary Mid","Reading") }}
+                            {{ numberOfQuestions("Elementary Mid","reading") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/4/type/2">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Elementary Final","Reading") }}
+                            {{ numberOfQuestions("Elementary Final","reading") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/5/type/2">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Mid","Reading") }}
+                            {{ numberOfQuestions("Pre-Intermediate Mid","reading") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/6/type/2">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","Reading") }}
+                            {{ numberOfQuestions("Pre-Intermediate Final","reading") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/7/type/2">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Intermediate Mid","Reading") }}
+                            {{ numberOfQuestions("Intermediate Mid","reading") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/8/type/2">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Intermediate Final","Reading") }}
+                            {{ numberOfQuestions("Intermediate Final","reading") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/9/type/2">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Upper-Intermediate Mid","Reading") }}
+                            {{ numberOfQuestions("Upper-Intermediate Mid","reading") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/10/type/2">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","Reading") }}
+                            {{ numberOfQuestions("Pre-Intermediate Final","reading") }}
                         </span>    
                     </router-link>
                 </td>
@@ -180,70 +180,70 @@
                 <td>
                     <router-link to="/admin-dashboard/level/1/type/3">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Beginner Mid","Grammar") }}
+                            {{ numberOfQuestions("Beginner Mid","grammar") }}
                         </span>
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/2/type/3">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Beginner Final","Grammar") }}
+                            {{ numberOfQuestions("Beginner Final","grammar") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/3/type/3">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Elementary Mid","Grammar") }}
+                            {{ numberOfQuestions("Elementary Mid","grammar") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/4/type/3">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Elementary Final","Grammar") }}
+                            {{ numberOfQuestions("Elementary Final","grammar") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/5/type/3">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Mid","Grammar") }}
+                            {{ numberOfQuestions("Pre-Intermediate Mid","grammar") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/6/type/3">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","Grammar") }}
+                            {{ numberOfQuestions("Pre-Intermediate Final","grammar") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/7/type/3">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Intermediate Mid","Grammar") }}
+                            {{ numberOfQuestions("Intermediate Mid","grammar") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/8/type/3">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Intermediate Final","Grammar") }}
+                            {{ numberOfQuestions("Intermediate Final","grammar") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/9/type/3">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Upper-Intermediate Mid","Grammar") }}
+                            {{ numberOfQuestions("Upper-Intermediate Mid","grammar") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/10/type/3">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","Grammar") }}
+                            {{ numberOfQuestions("Pre-Intermediate Final","grammar") }}
                         </span>    
                     </router-link>
                 </td>
@@ -255,70 +255,70 @@
                 <td>
                     <router-link to="/admin-dashboard/level/1/type/4">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Beginner Mid","Vocabulary") }}
+                            {{ numberOfQuestions("Beginner Mid","vocabulary") }}
                         </span>
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/2/type/4">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Beginner Final","Vocabulary") }}
+                            {{ numberOfQuestions("Beginner Final","vocabulary") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/3/type/4">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Elementary Mid","Vocabulary") }}
+                            {{ numberOfQuestions("Elementary Mid","vocabulary") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/4/type/4">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Elementary Final","Vocabulary") }}
+                            {{ numberOfQuestions("Elementary Final","vocabulary") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/5/type/4">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Mid","Vocabulary") }}
+                            {{ numberOfQuestions("Pre-Intermediate Mid","vocabulary") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/6/type/4">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","Vocabulary") }}
+                            {{ numberOfQuestions("Pre-Intermediate Final","vocabulary") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/7/type/4">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Intermediate Mid","Vocabulary") }}
+                            {{ numberOfQuestions("Intermediate Mid","vocabulary") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/8/type/4">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Intermediate Final","Vocabulary") }}
+                            {{ numberOfQuestions("Intermediate Final","vocabulary") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/9/type/4">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Upper-Intermediate Mid","Vocabulary") }}
+                            {{ numberOfQuestions("Upper-Intermediate Mid","vocabulary") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/10/type/4">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","Vocabulary") }}
+                            {{ numberOfQuestions("Pre-Intermediate Final","vocabulary") }}
                         </span>    
                     </router-link>
                 </td>
@@ -330,70 +330,70 @@
                 <td>
                     <router-link to="/admin-dashboard/level/1/type/5">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Beginner Mid","Speaking") }}
+                            {{ numberOfQuestions("Beginner Mid","speaking") }}
                         </span>
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/2/type/5">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Beginner Final","Speaking") }}
+                            {{ numberOfQuestions("Beginner Final","speaking") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/3/type/5">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Elementary Mid","Speaking") }}
+                            {{ numberOfQuestions("Elementary Mid","speaking") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/4/type/5">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Elementary Final","Speaking") }}
+                            {{ numberOfQuestions("Elementary Final","speaking") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/5/type/5">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Mid","Speaking") }}
+                            {{ numberOfQuestions("Pre-Intermediate Mid","speaking") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/6/type/5">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","Speaking") }}
+                            {{ numberOfQuestions("Pre-Intermediate Final","speaking") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/7/type/5">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Intermediate Mid","Speaking") }}
+                            {{ numberOfQuestions("Intermediate Mid","speaking") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/8/type/5">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Intermediate Final","Speaking") }}
+                            {{ numberOfQuestions("Intermediate Final","speaking") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/9/type/5">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Upper-Intermediate Mid","Speaking") }}
+                            {{ numberOfQuestions("Upper-Intermediate Mid","speaking") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/10/type/5">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","Speaking") }}
+                            {{ numberOfQuestions("Pre-Intermediate Final","speaking") }}
                         </span>    
                     </router-link>
                 </td>
@@ -408,63 +408,63 @@
                 <td>
                     <router-link to="/admin-dashboard/level/2/type/6">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Beginner Final","Writing") }}
+                            {{ numberOfQuestions("Beginner Final","writing") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/3/type/6">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Elementary Mid","Writing") }}
+                            {{ numberOfQuestions("Elementary Mid","writing") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/4/type/6">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Elementary Final","Writing") }}
+                            {{ numberOfQuestions("Elementary Final","writing") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/5/type/6">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Mid","Writing") }}
+                            {{ numberOfQuestions("Pre-Intermediate Mid","writing") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/6/type/6">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","Writing") }}
+                            {{ numberOfQuestions("Pre-Intermediate Final","writing") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/7/type/6">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Intermediate Mid","Writing") }}
+                            {{ numberOfQuestions("Intermediate Mid","writing") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/8/type/6">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Intermediate Final","Writing") }}
+                            {{ numberOfQuestions("Intermediate Final","writing") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/9/type/6">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Upper-Intermediate Mid","Writing") }}
+                            {{ numberOfQuestions("Upper-Intermediate Mid","writing") }}
                         </span>    
                     </router-link>
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/10/type/6">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","Writing") }}
+                            {{ numberOfQuestions("Pre-Intermediate Final","writing") }}
                         </span>    
                     </router-link>
                 </td>
