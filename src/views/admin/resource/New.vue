@@ -24,7 +24,7 @@ export default {
         async add(){
             await this.addResource();
             if(!this.validationErrors)
-                this.$router.push(`/admin-dashboard/level/${this.$route.params.level_id}/type/${this.$route.params.question_type}`);
+                this.$router.push(`/admin-dashboard/level/${this.$route.params.level_id}/type/${this.$route.params.question_type}/qp/${this.$route.params.qp_id}/fill`);
         } 
     },
     created(){

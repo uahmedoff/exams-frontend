@@ -3,18 +3,21 @@
         <div class="row">
             <label for="type" class="col-sm-2 col-form-label">Type</label>
             <div class="col-sm-10">
-                <select type="text" class="form-control form-control-sm" id="type" v-model="type">
+                <select type="text" class="form-control form-control-sm" id="type" v-model="type_id">
                     <option></option>
-                    <option :value="resourceTypes['Video']">Video</option>
-                    <option :value="resourceTypes['Audio']">Audio</option>
-                    <option :value="resourceTypes['Image']">Image</option>
-                    <option :value="resourceTypes['Text']">Text</option>
+                    <option 
+                        v-for="rt,index in questionType.resource_types" 
+                        :key="index"
+                        :value="rt.id"
+                    >
+                        {{ rt.name }}
+                    </option>
                 </select>
                 <span 
                 class="error"
-                v-if="validationErrors && validationErrors.type"  
+                v-if="validationErrors && validationErrors.type_id"  
                 >
-                {{ validationErrors.type[0] }}
+                {{ validationErrors.type_id[0] }}
                 </span>
             </div>
         </div>
@@ -54,7 +57,7 @@
 // import 'quill/dist/quill.bubble.css'
 // import { quillEditor } from 'vue-quill-editor'
 import {resourceTypes} from '@/constants/config'
-import {mapState} from 'vuex'
+import {mapState,mapActions} from 'vuex'
 export default {
     data(){
         return {
@@ -66,9 +69,10 @@ export default {
     },
     computed:{
         ...mapState('resource',['currentResource','validationErrors']),
-        type:{
+        ...mapState('questionType',['questionType']),
+        type_id:{
             get () {
-                return this.currentResource.type;
+                return this.currentResource.type_id;
             },
             set (value){
                 this.$store.commit('resource/updateType', value)
@@ -84,14 +88,17 @@ export default {
         },
     },
     mounted(){
+        this.getQuestionType(this.$route.params.question_type);
         this.$store.commit('resource/updateLevelId', this.$route.params.level_id)
+        this.$store.commit('resource/updateQplId', this.$route.params.qp_id)
         setTimeout(() => {
             this.$store.commit('resource/updateFile', "")
         },1000);
     },
     methods:{
+        ...mapActions('questionType',['getQuestionType']),
         fileChanged(e){
-            let fileReader = new FileReader();
+            let fileReader = new FileReader();            
             fileReader.readAsDataURL(e.target.files[0]);
             fileReader.onload = (e) => {
                 this.$store.commit('resource/updateFile', e.target.result)

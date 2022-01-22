@@ -6,6 +6,9 @@ import question from './modules/question'
 import level from './modules/level'
 import resource from './modules/resource'
 import answer from './modules/answer'
+import questionType from './modules/questionType'
+import resourceType from './modules/resourceType'
+import questionPlan from './modules/questionPlan'
 
 Vue.use(Vuex);
 
@@ -15,6 +18,9 @@ export default new Vuex.Store({
     question,
     level,
     resource,
-    answer
+    answer,
+    questionType,
+    resourceType,
+    questionPlan
   },
 });

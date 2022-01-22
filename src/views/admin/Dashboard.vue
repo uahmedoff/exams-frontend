@@ -40,18 +40,10 @@
                     <strong>Listening</strong>    
                 </td>
                 <td>
-                    <router-link to="/admin-dashboard/level/1/type/1">
-                        <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Beginner Mid","Listening") }}
-                        </span>
-                    </router-link>
+                    No
                 </td>
                 <td>
-                    <router-link to="/admin-dashboard/level/2/type/1">
-                        <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Beginner Final","Listening") }}
-                        </span>    
-                    </router-link>
+                    No
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/3/type/1">
@@ -115,11 +107,7 @@
                     <strong>Reading</strong> (additional)
                 </td>
                 <td>
-                    <router-link to="/admin-dashboard/level/1/type/2">
-                        <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Beginner Mid","Reading") }}
-                        </span>
-                    </router-link>
+                    No
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/2/type/2">
@@ -415,11 +403,7 @@
                     <strong>Writing</strong> (new questions)
                 </td>
                 <td>
-                    <router-link to="/admin-dashboard/level/1/type/6">
-                        <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Beginner Mid","Writing") }}
-                        </span>
-                    </router-link>
+                    No
                 </td>
                 <td>
                     <router-link to="/admin-dashboard/level/2/type/6">

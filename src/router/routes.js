@@ -26,80 +26,83 @@ const routes = [
             import("@/views/admin/Dashboard.vue"),
         },
         {
-            path: "level/:level_id/type/:question_type/resource",
-            name: "Resource",
-            component: () =>
-              import("@/views/admin/resource/Main.vue"),
-            children: [
-                {
-                    path: 'add',
-                    name: 'AddResource',
-                    component: () => import("@/views/admin/resource/New.vue"),
-                },
-                {
-                    path: ':resource_id/edit',
-                    name: 'EditResource',
-                    component: () => import("@/views/admin/resource/Edit.vue"),
-                }
-            ]
-          },
-          {
-            path: "level/:level_id/type/:question_type/question/:question_id/answer",
-            name: "Answer",
-            component: () =>
-              import("@/views/admin/answer/Main.vue"),
-            children: [
-                {
-                    path: 'add',
-                    name: 'AddAnswer',
-                    component: () => import("@/views/admin/answer/New.vue"),
-                },
-                {
-                    path: ':question_id/edit',
-                    name: 'EditAnswer',
-                    component: () => import("@/views/admin/answer/Edit.vue"),
-                }
-            ]
-          },
-          {
-            path: "level/:level_id/type/:question_type/question",
-            name: "Question",
-            component: () =>
-              import("@/views/admin/question/Main.vue"),
-            children: [
-                {
-                    path: 'add',
-                    name: 'AddQuestion',
-                    component: () => import("@/views/admin/question/New.vue"),
-                },
-                {
-                    path: ':question_id/edit',
-                    name: 'EditQuestion',
-                    component: () => import("@/views/admin/question/Edit.vue"),
-                }
-            ]
-          },
-          {
-            path: "level/:level_id/type/:question_type",
-            name: "ResourceAndQuestionsByLevelAndType",
-            component: () =>
-              import("@/views/admin/ResourceAndQuestions.vue"),
-            children: [
+          path: "level/:level_id/type/:question_type/qp/:qp_id/resource",
+          name: "Resource",
+          component: () =>
+            import("@/views/admin/resource/Main.vue"),
+          children: [
               {
-                  path: 'resource',
-                  name: 'Resource',
-                  component: () => import("@/views/admin/resource/Main.vue"),
-                  children: [
-                      {
-                          path: 'add',
-                          name: 'AddResource',
-                          component: () => import("@/views/admin/resource/New.vue"),
-                      }
-                  ]   
+                  path: 'add',
+                  name: 'AddResource',
+                  component: () => import("@/views/admin/resource/New.vue"),
+              },
+              {
+                  path: ':resource_id/edit',
+                  name: 'EditResource',
+                  component: () => import("@/views/admin/resource/Edit.vue"),
               }
-            ]
-          },
-          
+          ]
+        },
+        {
+          path: "level/:level_id/type/:question_type/qp/:qp_id/question/:question_id/answer",
+          name: "Answer",
+          component: () =>
+            import("@/views/admin/answer/Main.vue"),
+          children: [
+              {
+                  path: 'add',
+                  name: 'AddAnswer',
+                  component: () => import("@/views/admin/answer/New.vue"),
+              },
+              {
+                  path: ':question_id/edit',
+                  name: 'EditAnswer',
+                  component: () => import("@/views/admin/answer/Edit.vue"),
+              }
+          ]
+        },
+        {
+          path: "level/:level_id/type/:question_type/qp/:qp_id/fill",
+          name: "QuestionPlan",
+          component: () =>
+            import("@/views/admin/question-plan/Index.vue"),
+          children: [
+              {
+                path: 'add',
+                name: 'AddQuestion',
+                component: () => import("@/views/admin/question/New.vue"),
+              },
+              // {
+              //     path: ':question_id/edit',
+              //     name: 'EditQuestion',
+              //     component: () => import("@/views/admin/question/Edit.vue"),
+              // }
+          ]
+        },
+        {
+          path: "level/:level_id/type/:question_type/qp/:qp_id/question",
+          name: "Question",
+          component: () =>
+            import("@/views/admin/question/Main.vue"),
+          children: [
+              {
+                  path: 'add',
+                  name: 'AddQuestion',
+                  component: () => import("@/views/admin/question/New.vue"),
+              },
+              {
+                  path: ':question_id/edit',
+                  name: 'EditQuestion',
+                  component: () => import("@/views/admin/question/Edit.vue"),
+              }
+          ]
+        },
+        {
+          path: "level/:level_id/type/:question_type",
+          name: "ResourceAndQuestionsByLevelAndType",
+          component: () =>
+            import("@/views/admin/ResourceAndQuestions2.vue"),
+        },
       ]
     },
     {

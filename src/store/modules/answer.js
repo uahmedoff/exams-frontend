@@ -34,7 +34,7 @@ const mutations = {
     updateIsCorrect(state,payload){
         state.currentAnswer.is_correct = payload;
     },
-    setCurrentAnswernNull(state){
+    setCurrentAnswerNull(state){
         state.currentAnswer = {
             id: '',
             created_at: '',

@@ -11,10 +11,11 @@ const state = {
         created_at: '',
         updated_at: '',
         src: '',
-        type: '',
+        type_id: '',
         text: '',
         level_id: '',
         is_active: '',
+        qp_id: '',
         created_by: '',
         updated_by: ''
     },
@@ -41,11 +42,14 @@ const mutations = {
         state.validationErrors = payload;
     },
 
+    updateQplId(state,payload){
+        state.currentResource.qp_id = payload;
+    },
     updateLevelId(state,payload){
         state.currentResource.level_id = payload;
     },
     updateType(state,payload){
-        state.currentResource.type = payload;
+        state.currentResource.type_id = payload;
     },
     updateText(state,payload){
         state.currentResource.text = payload;

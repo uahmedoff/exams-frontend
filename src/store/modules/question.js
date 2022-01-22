@@ -13,7 +13,8 @@ const state = {
         question: '',
         level_id: '',
         resource_id: '',
-        type: '',
+        type_id: '',
+        pq_id: '',
         is_active: '',
         created_by: '',
         updated_by: ''
@@ -54,11 +55,14 @@ const mutations = {
         state.validationErrors = payload;
     },
 
+    updateQplId(state,payload){
+        state.currentQuestion.qp_id = payload;
+    },
     updateLevelId(state,payload){
         state.currentQuestion.level_id = payload;
     },
     updateType(state,payload){
-        state.currentQuestion.type = payload;
+        state.currentQuestion.type_id = payload;
     },
     updateResourceId(state,payload){
         state.currentQuestion.resource_id = payload;
@@ -74,7 +78,8 @@ const mutations = {
             question: '',
             level_id: '',
             resource_id: '',
-            type: '',
+            type_id: '',
+            qp_id: '',
             is_active: '',
             created_by: '',
             updated_by: ''
@@ -103,7 +108,8 @@ const mutations = {
             question: '',
             level_id: '',
             resource_id: '',
-            type: '',
+            type_id: '',
+            qp_id: '',
             is_active: '',
             created_by: '',
             updated_by: ''

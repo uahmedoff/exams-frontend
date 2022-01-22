@@ -42,6 +42,7 @@ export default {
     mounted(){
         this.$store.commit('question/updateLevelId', this.$route.params.level_id)
         this.$store.commit('question/updateType', this.$route.params.question_type)
+        this.$store.commit('question/updateQplId', this.$route.params.qp_id)
         if(this.$route.query.resource_id){
             this.$store.commit('question/updateResourceId', this.$route.query.resource_id);
         }
