@@ -247,7 +247,9 @@
 
 <script>
 import {mapState,mapActions} from 'vuex'
+import StringMix from "@/mixins/String"
 export default {
+    mixins:[StringMix],
     data(){
         return {
             resourceLoaded: false,
