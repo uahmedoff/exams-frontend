@@ -355,7 +355,7 @@ export default {
         async deleteFile(resource_id){
             if(confirm("Are you sure?")){
                 await this.activateOrInactivateResource(resource_id);
-                await this.getResourceResource(resource_id);
+                await this.getResource(resource_id);
                 await this.getQuestionPlan(this.$route.params.qp_id);   
             }
         },
