@@ -97,7 +97,7 @@
                 <td>
                     <router-link to="/admin-dashboard/level/10/type/1">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","listening") }}
+                            {{ numberOfQuestions("Upper-Intermediate Final","listening") }}
                         </span>    
                     </router-link>
                 </td>
@@ -168,7 +168,7 @@
                 <td>
                     <router-link to="/admin-dashboard/level/10/type/2">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","reading") }}
+                            {{ numberOfQuestions("Upper-Intermediate Final","reading") }}
                         </span>    
                     </router-link>
                 </td>
@@ -243,7 +243,7 @@
                 <td>
                     <router-link to="/admin-dashboard/level/10/type/3">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","grammar") }}
+                            {{ numberOfQuestions("Upper-Intermediate Final","grammar") }}
                         </span>    
                     </router-link>
                 </td>
@@ -318,7 +318,7 @@
                 <td>
                     <router-link to="/admin-dashboard/level/10/type/4">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","vocabulary") }}
+                            {{ numberOfQuestions("Upper-Intermediate Final","vocabulary") }}
                         </span>    
                     </router-link>
                 </td>
@@ -393,7 +393,7 @@
                 <td>
                     <router-link to="/admin-dashboard/level/10/type/5">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","speaking") }}
+                            {{ numberOfQuestions("Upper-Intermediate Final","speaking") }}
                         </span>    
                     </router-link>
                 </td>
@@ -464,7 +464,7 @@
                 <td>
                     <router-link to="/admin-dashboard/level/10/type/6">
                         <span class="badge rounded-pill bg-secondary">
-                            {{ numberOfQuestions("Pre-Intermediate Final","writing") }}
+                            {{ numberOfQuestions("Upper-Intermediate Final","writing") }}
                         </span>    
                     </router-link>
                 </td>

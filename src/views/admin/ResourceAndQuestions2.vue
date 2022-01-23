@@ -1,9 +1,37 @@
 <template>
     <div class="mt-3">
 
-        <h3>Resource and questions of {{level.name}} - {{ questionType.name }}</h3>
+        <h3>{{level.name}} - {{ capitalized(questionType.name) }}</h3>
 
-        <table class="table table-bordered table-condensed table-hover">
+        <router-link class="btn btn-secondary btn-sm mb-2" :to="`/admin-dashboard`">Back</router-link> &nbsp;
+
+        <template v-if="numberOfQuestionPlans">
+            <h4 class="badge bg-secondary">{{ numberOfQuestionPlans.with_questions }}</h4>
+             / 
+            <h4 class="badge bg-secondary">{{ numberOfQuestionPlans.all }}</h4> 
+        </template>    
+
+        <br>
+
+        <a 
+            class="btn btn-sm btn-success mb-3" 
+            href="#" 
+            @click.prevent="addQP"
+        >
+            <b-icon icon="plus" /> Add question
+        </a> &nbsp;
+        <b-spinner v-if="isLoading" variant="success"></b-spinner>
+
+        <!-- <b-skeleton-table
+            v-if="isLoading"
+            :rows="5"
+            :columns="5"
+            :table-props="{ bordered: true, striped: true }"
+        ></b-skeleton-table> -->
+
+        <table 
+            class="table table-bordered table-condensed table-hover"
+        >
             <tr>
                 <th>#</th>
                 <th>Resource</th>
@@ -12,7 +40,24 @@
                 <th>Action</th>
             </tr>
             <tr v-for="qp,index in questionPlans" :key="index">
-                <td>Question{{++index}}</td>
+                <td>
+                    Question
+                    {{  
+                        correct_pages(
+                            index,
+                            questionPlansPagination.current_page,
+                            questionPlansPagination.per_page,
+                            questionPlansPagination.total,
+                            "desc"
+                        ) 
+                    }}  
+                    <b-dropdown size="sm">
+                        <template #button-content></template>
+                        <b-dropdown-item href="#" @click.prevent="deleteQP(qp.id)">
+                            <span class="color-red"><b-icon icon="trash" /> Delete</span>
+                        </b-dropdown-item>
+                    </b-dropdown>
+                </td>
                 <td>
                     <span v-if="questionType.resource_types && questionType.resource_types.length">
                         <div v-for="rt,index in questionType.resource_types" :key="index">
@@ -42,25 +87,26 @@
                     </router-link>
                 </td>
             </tr>
-            <tr>
-                <td colspan="5">
-                    <a 
-                        class="btn btn-sm btn-success" 
-                        href="#" 
-                        @click.prevent="addQP"
-                    >
-                        Add question +
-                    </a>
-                </td>
-            </tr>
         </table>
+
+        <b-pagination
+            v-if="questionPlansPagination.last_page>1"
+            @input="loadPage"
+            v-model="questionPlansPagination.current_page"
+            :total-rows="questionPlansPagination.total"
+            :per-page="questionPlansPagination.per_page"
+            aria-controls="my-table"
+        ></b-pagination>
 
     </div>
 </template>
 
 <script>
 import {mapState,mapActions} from 'vuex'
+import ItemsNumber from "@/mixins/ItemsNumbers"
+import StringMix from "@/mixins/String"
 export default {
+    mixins:[ItemsNumber,StringMix],
     data(){
         return {
             apiUrl: process.env.VUE_APP_API_URL,
@@ -70,7 +116,12 @@ export default {
     computed:{
         ...mapState('level',['level']),
         ...mapState('questionType',['questionType']),
-        ...mapState('questionPlan',['questionPlans']),
+        ...mapState('questionPlan',[
+            'isLoading',
+            'questionPlans',
+            'questionPlansPagination',
+            'numberOfQuestionPlans'
+        ]),
         isLevelLoading(){
             return this.$store.state.level.isLoading;
         },
@@ -78,24 +129,41 @@ export default {
     mounted(){
         this.getLevel(this.$route.params.level_id);
         this.getQuestionType(this.$route.params.question_type);
-        this.getQuestionPlans({
+        this.getNumberOfQuestionPlans({
             level_id: this.$route.params.level_id,
-            question_type_id: this.$route.params.question_type
+            question_type_id: this.$route.params.question_type,
         });
+        this.loadPage()
     },
     methods:{
         ...mapActions('level',['getLevel']),
         ...mapActions('questionType',['getQuestionType']),
-        ...mapActions('questionPlan',['getQuestionPlans','addQuestionPlan']),
+        ...mapActions('questionPlan',[
+            'getQuestionPlans',
+            'addQuestionPlan',
+            'deleteQuestionPlan',
+            'getNumberOfQuestionPlans'
+        ]),
+        async loadPage(pageNum = 1){
+            await this.getQuestionPlans({
+                level_id: this.$route.params.level_id,
+                question_type_id: this.$route.params.question_type,
+                order: "desc",
+                page: pageNum
+            });
+        },
         async addQP(){
             await this.addQuestionPlan({
                 level_id: this.$route.params.level_id,
                 question_type_id: this.$route.params.question_type
             });
-            await this.getQuestionPlans({
-                level_id: this.$route.params.level_id,
-                question_type_id: this.$route.params.question_type
-            });
+            await this.loadPage()
+        },
+        async deleteQP(id){
+            if(confirm("Are you sure?")){
+                await this.deleteQuestionPlan(id)
+                await this.loadPage()
+            }
         }
     }
 }    
@@ -104,5 +172,8 @@ export default {
 <style  scoped>
     .btn-success {
         background-color: #198754!important;
+    }
+    .color-red{
+        color: red;
     }
 </style>

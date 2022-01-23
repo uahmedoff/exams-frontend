@@ -42,6 +42,9 @@ const mutations = {
         state.validationErrors = payload;
     },
 
+    updateId(state,payload){
+        state.currentResource.id = payload;
+    },
     updateQplId(state,payload){
         state.currentResource.qp_id = payload;
     },
@@ -76,8 +79,9 @@ const mutations = {
         state.validationErrors = null;
         state.isLoading = true;
     },
-    addResourceSuccess(state){
+    addResourceSuccess(state,payload){
         state.isLoading = false;
+        state.currentResource = payload;
     },
     addResourceFailure(state,payload){
         state.isLoading = false;
@@ -149,7 +153,6 @@ const actions = {
         try {
             const response = (await resourceApi.addResource(context.state.currentResource));
             context.commit('addResourceSuccess',response);
-            context.commit('setCurrentResourceNull');
         } 
         catch (error) {
             context.commit('addResourceFailure',error.response.data.errors);
@@ -158,6 +161,7 @@ const actions = {
     async getResource(context,id){
         context.commit('currentResourceStart');
         try {
+            context.commit('setCurrentResourceNull');
             const response = (await resourceApi.getResource(id));
             context.commit('currentResourceSuccess',response.data);
         } 

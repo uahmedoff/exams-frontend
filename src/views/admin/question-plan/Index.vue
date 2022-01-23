@@ -2,9 +2,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 mt-3">
-                <h3>Resource and questions of {{level.name}} - {{ questionType.name }}</h3>
+                <h3>{{level.name}} - {{ capitalized(questionType.name) }}</h3>
 
                 <router-link class="btn btn-secondary btn-sm" :to="`/admin-dashboard/level/${$route.params.level_id}/type/${$route.params.question_type}`">Back</router-link>
+                
+                <!-- {{ currentResource }}<br>
+                {{ questionPlan.resource_id }} -->
 
                 <div class="mt-5">
                     <!-- {{ questionPlan }} -->
@@ -13,24 +16,46 @@
                         class="table table-bordered table-condensed table-hover" 
                     >
                         <tr>
-                            <th>File</th>
                             <th>
-                                <router-link 
+                                File
+                                <span v-if="questionPlan.resource_id">✅</span>
+                                <span v-else>❌</span>
+                            </th>
+                            <th>
+                                <!-- <router-link 
                                     v-if="!questionPlan.resource_id"
                                     :to="`/admin-dashboard/level/${$route.params.level_id}/type/${$route.params.question_type}/qp/${$route.params.qp_id}/resource/add`" 
                                     class="btn btn-success btn-sm"
                                 >
                                     Add
-                                </router-link>
+                                </router-link> -->
                             </th>
-                            <th>Save</th>
+                            <th>
+                                <a 
+                                    v-if="resourceLoaded"
+                                    href="#"
+                                    class="btn btn-success btn-sm"
+                                    @click.prevent="saveResource()"
+                                >
+                                    Save
+                                </a>
+                            </th>
                         </tr>
                         <tr>
                             <td>Type</td>
                             <td>
                                 <span v-if="questionType.resource_types && questionType.resource_types.length">
                                     <span v-for="rt,index in questionType.resource_types" :key="index">
-                                        {{ rt.name }} /
+                                        <!-- {{ rt.name }} / -->
+                                        <label>
+                                            <input 
+                                                type="radio" 
+                                                :value="rt.id"
+                                                v-model="resource_type_id"
+                                                @change="isResourceLoaded"
+                                            > 
+                                                {{ rt.name }}
+                                        </label> &nbsp;
                                     </span>
                                 </span>
                             </td>
@@ -39,73 +64,63 @@
                         <tr>
                             <td>File</td>
                             <td>
-                                <template v-if="questionPlan.resource_id">
-                                    <video 
-                                        v-if="questionPlan.qresource.src && questionPlan.qresource.type_id == 1"
-                                        controls
-                                    >
-                                        <source :src="`${apiUrl}/storage/${questionPlan.qresource.src}`" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video> 
-                                    <audio 
-                                        v-if="questionPlan.qresource.src && questionPlan.qresource.type_id == 2"
-                                        controls
-                                    >
-                                        <source :src="`${apiUrl}/storage/${questionPlan.qresource.src}`" type="audio/mpeg">
-                                        Your browser does not support the audio tag.
-                                    </audio> 
-                                    <img 
-                                        v-if="questionPlan.qresource.src && questionPlan.qresource.type_id == 3"
-                                        :src="`${apiUrl}/storage${questionPlan.qresource.src}`" 
-                                        class="card-img-top" 
-                                    >
-                                </template>
-                                <template v-else> - </template>
+                                <input type="file" class="form-control form-control-sm" id="file" placeholder="File" @change="fileChanged">
                             </td>
                             <td>
-                                <router-link 
+                                <!-- <router-link 
                                     v-if="questionPlan.resource_id"
                                     :to="`/admin-dashboard/level/${$route.params.level_id}/type/${$route.params.question_type}/qp/${$route.params.qp_id}/resource/${questionPlan.resource_id}/edit`"
                                 >
                                         Edit
-                                    </router-link>
+                                    </router-link> -->
                             </td>
                         </tr>
-                    </table>
-
-                    <table 
-                        class="table table-bordered table-condensed table-hover mt-5"
-                        style="border:1px solid #555!important"
-                    >
-                        <tr>
-                            <th>Question</th>
-                            <th>
-                                <router-link 
-                                    v-if="!questionPlan.question_id"
-                                    :to="`/admin-dashboard/level/${$route.params.level_id}/type/${$route.params.question_type}/qp/${$route.params.qp_id}/question/add`" 
-                                    class="btn btn-success btn-sm"
+                        <tr v-if="questionPlan.resource_id">
+                            <td>Preview</td>
+                            <td>
+                                <video 
+                                    v-if="questionPlan.qresource.src && questionPlan.qresource.type_id == 1"
+                                    controls
                                 >
-                                    Add
-                                </router-link>
-                            </th>
-                            <th></th>
+                                    <source :src="`${apiUrl}/storage/${questionPlan.qresource.src}`" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video> 
+                                <audio 
+                                    v-if="questionPlan.qresource.src && questionPlan.qresource.type_id == 2"
+                                    controls
+                                >
+                                    <source :src="`${apiUrl}/storage/${questionPlan.qresource.src}`" type="audio/mpeg">
+                                    Your browser does not support the audio tag.
+                                </audio> 
+                                <img 
+                                    v-if="questionPlan.qresource.src && questionPlan.qresource.type_id == 3"
+                                    :src="`${apiUrl}/storage${questionPlan.qresource.src}`" 
+                                    class="card-img-top" 
+                                >
+                            </td>
+                            <td>
+                                <a 
+                                    v-if="questionPlan.resource_id"
+                                    href="#" 
+                                    @click.prevent="deleteFile(questionPlan.resource_id)"
+                                    class="btn bg-danger text-white btn-sm"
+                                >
+                                    <b-icon icon="trash"></b-icon> 
+                                </a>    
+                            </td>
                         </tr>
                         <tr>
                             <td>Text</td>
                             <td>
-                                <span v-if="questionPlan.question_id">
-                                    {{ questionPlan.question.question }}
-                                </span>
-                                <span v-else> - </span>
+                                <textarea 
+                                    @input="isResourceLoaded"
+                                    class="form-control form-control-sm" 
+                                    id="text" 
+                                    v-model="resource_text" 
+                                    placeholder="Text"
+                                ></textarea>
                             </td>
-                            <td>
-                                <router-link 
-                                    v-if="questionPlan.question_id"
-                                    :to="`/admin-dashboard/level/${$route.params.level_id}/type/${$route.params.question_type}/qp/${$route.params.qp_id}/question/${questionPlan.question_id}/edit`"
-                                >
-                                    Edit
-                                </router-link>
-                            </td>
+                            <td></td>
                         </tr>
                     </table>
 
@@ -114,25 +129,112 @@
                         style="border:1px solid #555!important"
                     >
                         <tr>
-                            <th>Answer</th>
                             <th>
-                                <router-link 
-                                    class="btn btn-success btn-sm mb-2"
-                                    :to="`/admin-dashboard/level/${$route.params.level_id}/type/${$route.params.question_type}/qp/${$route.params.qp_id}/question/${questionPlan.question_id}/answer/add`"
-                                >
-                                    Add
-                                </router-link>
+                                Question 
+                                <span v-if="questionPlan.question_id">✅</span>
+                                <span v-else>❌</span>
                             </th>
-                            <th></th>
+                            <th>
+                                
+                            </th>
+                            <th>
+                                <a 
+                                    v-if="currentQuestion.question"
+                                    href="#"
+                                    class="btn btn-success btn-sm"
+                                    @click.prevent="saveQuestion()"
+                                >
+                                    Save
+                                </a>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>Text</td>
+                            <td>
+                                <textarea 
+                                    class="form-control form-control-sm" 
+                                    id="text" 
+                                    v-model="question_text" 
+                                    placeholder="Text"
+                                ></textarea>
+                            </td>
+                            <td>
+                                <a 
+                                    v-if="questionPlan.question_id"
+                                    href="#" 
+                                    @click.prevent="deleteQuestion(questionPlan.question_id)"
+                                    class="btn bg-danger text-white btn-sm"
+                                >
+                                    <b-icon icon="trash"></b-icon> 
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table 
+                        v-if="questionPlan.question_id"
+                        class="table table-bordered table-condensed table-hover mt-5"
+                        style="border:1px solid #555!important"
+                    >
+                        <tr>
+                            <th>
+                                Answer 
+                                <span v-if="questionPlan.question_id && questionPlan.question.answers && questionPlan.question.answers.length">✅</span>
+                                <span v-else>❌</span>
+                            </th>
+                            <th>
+                                Answer
+                                <textarea 
+                                    class="form-control form-control-sm" 
+                                    id="text" 
+                                    v-model="answer_text" 
+                                    placeholder="Please, type answer..."
+                                    cols="5"
+                                ></textarea>
+                                Is correct?
+                                <label>
+                                    <input 
+                                        type="radio" 
+                                        :value="true"
+                                        v-model="answer_is_correct"
+                                    > 
+                                        Yes
+                                </label> &nbsp;
+                                <label>
+                                    <input 
+                                        type="radio" 
+                                        :value="false"
+                                        v-model="answer_is_correct"
+                                    > 
+                                        No
+                                </label> &nbsp;
+                            </th>
+                            <th>
+                                <a 
+                                    v-if="currentAnswer.answer"
+                                    href="#"
+                                    class="btn btn-success btn-sm"
+                                    @click.prevent="saveAnswer()"
+                                >
+                                    Save
+                                </a>
+                            </th>
                         </tr>
                         <template v-if="questionPlan.question_id">
                             <tr v-for="answer,index in questionPlan.question.answers" :key="index">
                                 <td>{{answer.answer}}</td>
                                 <td>
                                     <span v-if="answer.is_correct">✅</span>
+                                    <span v-else>❌</span>
                                 </td>
                                 <td>
-                                    Edit
+                                    <a 
+                                        href="#" 
+                                        @click.prevent="removeAnswer(answer.id)"
+                                        class="btn bg-danger text-white btn-sm"
+                                    >
+                                        <b-icon icon="trash"></b-icon> 
+                                    </a>
                                 </td>
                             </tr>
                         </template>
@@ -148,23 +250,148 @@ import {mapState,mapActions} from 'vuex'
 export default {
     data(){
         return {
+            resourceLoaded: false,
             apiUrl: process.env.VUE_APP_API_URL,
         }
     },
     computed:{
         ...mapState('level',['level']),
         ...mapState('questionType',['questionType']),
-        ...mapState('questionPlan',['questionPlan'])
+        ...mapState('questionPlan',['questionPlan']),
+        ...mapState('resource',['currentResource','validationErrors']),
+        ...mapState('question',['currentQuestion','validationErrors']),
+        ...mapState('answer',['currentAnswer','validationErrors']),
+        resource_type_id:{
+            get () {
+                return this.currentResource.type_id;
+            },
+            set (value){
+                this.$store.commit('resource/updateType', value);
+            }
+        },
+        resource_text:{
+            get () {
+                return this.currentResource.text;
+            },
+            set (value){
+                this.$store.commit('resource/updateText', value);
+            }
+        },
+        question_text:{
+            get () {
+                return this.currentQuestion.question;
+            },
+            set (value){
+                this.$store.commit('question/updateQuestion', value);
+            }
+        },
+        answer_text:{
+            get () {
+                return this.currentAnswer.answer;
+            },
+            set (value){
+                this.$store.commit('answer/updateAnswer', value);
+                this.$store.commit('answer/updateQuestionId', this.questionPlan.question_id);
+            }
+        },
+        answer_is_correct:{
+            get () {
+                return this.currentAnswer.is_correct;
+            },
+            set (value){
+                this.$store.commit('answer/updateIsCorrect', value);
+            }
+        },
     },
     mounted(){
         this.getLevel(this.$route.params.level_id);
         this.getQuestionType(this.$route.params.question_type);
         this.getQuestionPlan(this.$route.params.qp_id);
+        this.$store.commit('resource/updateLevelId', this.$route.params.level_id)
+        this.$store.commit('resource/updateQplId', this.$route.params.qp_id)
+        this.$store.commit('question/updateLevelId', this.$route.params.level_id)
+        this.$store.commit('question/updateQplId', this.$route.params.qp_id)
+        this.$store.commit('question/updateType', this.$route.params.question_type)
+        setTimeout(() => {
+            this.$store.commit('resource/updateFile', "");
+            if(this.questionPlan.resource_id){
+                this.getResource(this.questionPlan.resource_id);
+            }
+            if(this.questionPlan.question_id){
+                this.getQuestion(this.questionPlan.question_id);
+                this.$store.commit('answer/updateQuestionId', this.questionPlan.question_id)
+                this.$store.commit('answer/updateQuestion', this.questionPlan.question.question)
+            }
+        },1500);
     },
     methods:{
         ...mapActions('level',['getLevel']),
+        ...mapActions('resource',['addResource','getResource','updateResource','activateOrInactivateResource']),
+        ...mapActions('question',['addQuestion','getQuestion','updateQuestion','activateOrInactivateQuestion']),
+        ...mapActions('answer',['addAnswer','deleteAnswer']),
         ...mapActions('questionType',['getQuestionType']),
         ...mapActions('questionPlan',['getQuestionPlan']),
+        fileChanged(e){
+            let fileReader = new FileReader();            
+            fileReader.readAsDataURL(e.target.files[0]);
+            fileReader.onload = (e) => {
+                this.$store.commit('resource/updateFile', e.target.result);
+                if(this.currentResource.type_id)
+                    this.resourceLoaded = true;
+            }
+        },
+        async saveResource(){
+            if(this.questionPlan.resource_id){
+                await this.updateResource(this.questionPlan.resource_id);
+            }
+            else{
+                await this.addResource();
+            }
+            if(!this.validationErrors)
+                await this.getQuestionPlan(this.$route.params.qp_id);   
+        },
+        async deleteFile(resource_id){
+            if(confirm("Are you sure?")){
+                await this.activateOrInactivateResource(resource_id);
+                await this.getResourceResource(resource_id);
+                await this.getQuestionPlan(this.$route.params.qp_id);   
+            }
+        },
+        async deleteQuestion(question_id){
+            if(confirm("Are you sure?")){
+                await this.activateOrInactivateQuestion(question_id);
+                this.$store.commit('question/updateQuestion', null);
+                await this.getQuestionPlan(this.$route.params.qp_id);   
+            }
+        },
+        isResourceLoaded(){
+            if(this.currentResource.text || (this.currentResource.src && this.currentResource.type_id))
+                this.resourceLoaded = true;
+            else    
+                this.resourceLoaded = false;
+        },
+        async saveQuestion(){
+            if(this.questionPlan.question_id){
+                await this.updateQuestion(this.questionPlan.question_id);
+            }
+            else{
+                await this.addQuestion();
+            }
+            if(!this.validationErrors)
+                await this.getQuestionPlan(this.$route.params.qp_id);   
+        },
+        async saveAnswer(){            
+            await this.addAnswer();
+            if(!this.validationErrors)
+                await this.getQuestionPlan(this.$route.params.qp_id);   
+        },
+        async removeAnswer(answer_id){
+            if(confirm("Are you sure?")){
+                await this.deleteAnswer(answer_id);
+                if(!this.validationErrors)
+                    await this.getQuestionPlan(this.$route.params.qp_id);   
+            }
+        }
     }
 }
 </script>
@@ -172,6 +399,15 @@ export default {
 <style  scoped>
     .table, .table th, .table td{
         border: 1px solid #555!important;
+    }
+    .table th, .table td{
+        padding:10px;
+    }
+    .table th:first-child{
+        width:150px
+    }
+    .table th:nth-child(3){
+        width:150px
     }
     .btn-success {
         background-color: #198754!important;

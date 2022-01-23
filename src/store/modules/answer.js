@@ -96,64 +96,44 @@ const mutations = {
         state.validationErrors = payload;
     },
 
-    activateOrInactivateResourceStart(state){
+    activateOrInactivateAnswerStart(state){
         state.validationErrors = null;
         state.isLoading = true;
     },
-    activateOrInactivateResourceSuccess(state,payload){
+    activateOrInactivateAnswerSuccess(state,payload){
         state.isLoading = false;
     },
-    activateOrInactivateResourceFailure(state,payload){
+    activateOrInactivateAnswerFailure(state,payload){
         state.isLoading = false;
         state.validationErrors = payload;
     },
+
+
 }
 
 const actions = {
     async addAnswer(context){
-        context.commit('addAnswerStart');
+        context.commit('activateOrInactivateAnswerStart');
         try {
             const response = (await answerApi.addAnswer(context.state.currentAnswer));
-            context.commit('addAnswerSuccess',response);
+            context.commit('activateOrInactivateAnswerSuccess',response);
             context.commit('setCurrentAnswerNull');
         } 
         catch (error) {
-            context.commit('addAnswerFailure',error.response.data.errors);
+            context.commit('activateOrInactivateAnswerFailure',error.response.data.errors);
         }
     },
-    // async getResource(context,id){
-    //     context.commit('currentResourceStart');
-    //     try {
-    //         const response = (await resourceApi.getResource(id));
-    //         context.commit('currentResourceSuccess',response.data);
-    //     } 
-    //     catch (error) {
-    //         context.commit('currentResourceFailure',error.response.data.errors);
-    //     }
-    // },
-    // async updateResource(context,id){
-    //     context.commit('updateResourceStart');
-    //     try {
-    //         const response = (await resourceApi.updateResource({
-    //             id: id,
-    //             currentResource: context.state.currentResource 
-    //         }));
-    //         context.commit('currentResourceSuccess',response.data);
-    //     } 
-    //     catch (error) {
-    //         context.commit('currentResourceFailure',error.response.data.errors);
-    //     }
-    // },
-    // async activateOrInactivateResource(context,id){
-    //     context.commit('activateOrInactivateResourceStart');
-    //     try {
-    //         const response = (await resourceApi.activateOrInactivateResource(id));
-    //         context.commit('activateOrInactivateResourceSuccess',response);
-    //     } 
-    //     catch (error) {
-    //         context.commit('activateOrInactivateResourceFailure',error.response.data.errors);
-    //     }
-    // },
+    async deleteAnswer(context,id){
+        context.commit('activateOrInactivateAnswerStart');
+        try {
+            const response = (await answerApi.deleteAnswer(id));
+            context.commit('activateOrInactivateAnswerSuccess',response);
+            context.commit('setCurrentAnswerNull');
+        } 
+        catch (error) {
+            context.commit('activateOrInactivateAnswerFailure',error.response.data.errors);
+        }
+    }
 }
 
 export default{

@@ -186,6 +186,7 @@ const actions = {
     async getQuestion(context,id){
         context.commit('currentQuestionStart');
         try {
+            context.commit('setCurrentQuestionNull');
             const response = (await questionApi.getQuestion(id)).data;
             context.commit('currentQuestionSuccess',response)
         } 
