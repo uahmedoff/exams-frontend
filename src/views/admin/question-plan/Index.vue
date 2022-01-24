@@ -109,7 +109,7 @@
                                 </a>    
                             </td>
                         </tr>
-                        <tr>
+                        <tr v-if="hasText()">
                             <td>Text</td>
                             <td>
                                 <textarea 
@@ -393,7 +393,20 @@ export default {
                 if(!this.validationErrors)
                     await this.getQuestionPlan(this.$route.params.qp_id);   
             }
+        },
+        hasText(){
+            for(let i=0;i<this.questionType.resource_types.length;i++){
+                if(this.questionType.resource_types[i].name == 'text'){
+                    return true;
+                }
+            }
+            return false;
         }
+    },
+    destroyed(){
+        this.$store.commit('resource/updateText',null);
+        this.$store.commit('question/updateQuestion',null);
+        this.$store.commit('answer/updateAnswer',null);
     }
 }
 </script>
