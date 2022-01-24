@@ -13,6 +13,7 @@
                     <!-- {{ questionPlan }} -->
 
                     <table 
+                        v-if="questionType.resource_types && questionType.resource_types.length"
                         class="table table-bordered table-condensed table-hover" 
                     >
                         <tr>

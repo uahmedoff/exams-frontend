@@ -5,7 +5,6 @@ import router from "./router";
 import store from "./store";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import {initialize} from './helpers/general';
-Vue.component('pagination', require('laravel-vue-pagination'));
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
