@@ -14,9 +14,11 @@ const state = {
         question_id: '',
         is_correct: '',
         is_active: '',
+        type_id: '',
         created_by: '',
         updated_by: ''
     },
+    answerTypeId: '',
     validationErrors: null,
 }
 
@@ -33,6 +35,12 @@ const mutations = {
     },
     updateIsCorrect(state,payload){
         state.currentAnswer.is_correct = payload;
+    },
+    updateTypeId(state,payload){
+        state.currentAnswer.type_id = payload;
+    },
+    updateAnswerTypeId(state,payload){
+        state.answerTypeId = payload;
     },
     setCurrentAnswerNull(state){
         state.currentAnswer = {
@@ -72,6 +80,7 @@ const mutations = {
             text: '',
             level_id: '',
             is_active: '',
+            type_id: '',
             created_by: '',
             updated_by: ''
         };

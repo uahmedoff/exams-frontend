@@ -179,9 +179,30 @@
                     >
                         <tr>
                             <th>
+                                Answer: {{ currentAnswer.answer }}<br>
+                                Type id: {{ currentAnswer.type_id }} - {{ this.answerTypeId }}<br>
+                                Is correct:{{ currentAnswer.is_correct }}<br>
+                                <br>
                                 Answer 
-                                <span v-if="questionPlan.question_id && questionPlan.question.answers && questionPlan.question.answers.length">✅</span>
+                                <span v-if="
+                                    questionPlan.question_id && 
+                                    questionPlan.question.answers && 
+                                    questionPlan.question.answers.length"
+                                >✅</span>
                                 <span v-else>❌</span>
+                                <select 
+                                    v-model="answer_type_id"
+                                >
+                                    <option value=""></option>
+                                    <option value="1">Gap filling</option>
+                                    <option value="2">Multiple choice</option>
+                                    <option value="3">Choose the correct option</option>
+                                    <option value="4">Write the missing letters</option>
+                                    <option value="5">Fill gaps with given words</option>
+                                    <option value="6">Match questions</option>
+                                    <option value="7">Complete the sentences with articles</option>
+                                    <option value="8">Complete the sentences with correct verbs</option>
+                                </select>
                             </th>
                             <th>
                                 Answer
@@ -212,7 +233,11 @@
                             </th>
                             <th>
                                 <a 
-                                    v-if="currentAnswer.answer"
+                                    v-if="
+                                        currentAnswer.answer && 
+                                        currentAnswer.type_id && 
+                                        (currentAnswer.is_correct === true || currentAnswer.is_correct === false)
+                                    "
                                     href="#"
                                     class="btn btn-success btn-sm"
                                     @click.prevent="saveAnswer()"
@@ -263,7 +288,7 @@ export default {
         ...mapState('questionPlan',['questionPlan']),
         ...mapState('resource',['currentResource','validationErrors']),
         ...mapState('question',['currentQuestion','validationErrors']),
-        ...mapState('answer',['currentAnswer','validationErrors']),
+        ...mapState('answer',['currentAnswer','answerTypeId','validationErrors']),
         resource_type_id:{
             get () {
                 return this.currentResource.type_id;
@@ -303,6 +328,15 @@ export default {
             },
             set (value){
                 this.$store.commit('answer/updateIsCorrect', value);
+            }
+        },
+        answer_type_id:{
+            get () {
+                return this.currentAnswer.type_id;
+            },
+            set (value){
+                this.$store.commit('answer/updateTypeId', value);
+                this.$store.commit('answer/updateAnswerTypeId', value);
             }
         },
     },
@@ -385,8 +419,10 @@ export default {
         },
         async saveAnswer(){            
             await this.addAnswer();
-            if(!this.validationErrors)
+            if(!this.validationErrors){
                 await this.getQuestionPlan(this.$route.params.qp_id);   
+                await this.$store.commit('answer/updateTypeId', this.answerTypeId);
+            }
         },
         async removeAnswer(answer_id){
             if(confirm("Are you sure?")){
