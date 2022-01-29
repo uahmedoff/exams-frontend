@@ -384,8 +384,10 @@ export default {
             else{
                 await this.addResource();
             }
-            if(!this.validationErrors)
+            if(!this.validationErrors){
                 await this.getQuestionPlan(this.$route.params.qp_id);   
+                this.$store.commit('question/updateResourceId', this.questionPlan.resource_id);
+            }
         },
         async deleteFile(resource_id){
             if(confirm("Are you sure?")){

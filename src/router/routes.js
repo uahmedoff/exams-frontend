@@ -106,6 +106,28 @@ const routes = [
       ]
     },
     {
+      path: "/assesser",
+      name: "AssesserMain",
+      component: () => import("@/layouts/Main.vue"),
+      meta: {
+        requiresAuth: true,
+      },      
+      children: [
+        {
+          path: "",
+          name: "AssesserHome",
+          component: () =>
+            import("@/views/assesser/Index.vue"),
+        },
+        {
+          path: "exam/:exam_id",
+          name: "AssesserExam",
+          component: () =>
+            import("@/views/assesser/Exam.vue"),
+        },
+      ]  
+    },
+    {
       path: "/",
       name: "Main",
       component: () => import("@/layouts/Main.vue"),

@@ -7,6 +7,7 @@ const state = {
     isSubmitting: false,
     isLoading: false,
     currentUser: null,
+    student: null,
     validationErrors: null,
     isLoggedIn: null
 }
@@ -37,11 +38,11 @@ const getters = {
     },
     isAssesser: state => {
         if(state.currentUser)
-            return state.currentUser.role == roles.isAssesser;
+            return state.currentUser.role == roles.Assesser;
         if(getItem('user'))
-            return getItem('user').role == roles.isAssesser;   
+            return getItem('user').role == roles.Assesser;   
         return null;
-    }
+    },
 };
 
 const mutations = {
@@ -72,6 +73,19 @@ const mutations = {
         state.isLoading = false;
         state.isLoggedIn = false;
         state.currentUser = null;
+    },
+    getStudentStart(state){
+        state.isLoading = false;
+        state.isLoggedIn = false;
+        state.currentUser = null;
+    },
+    getStudentSuccess(state,payload){
+        state.isLoading = false;
+        state.student = payload;
+    },
+    getStudentFailure(state,payload){
+        state.isLoading = false;
+        state.validationErrors = payload;
     },
     logout(state){
         state.currentUser = null
@@ -111,7 +125,18 @@ const actions = {
         removeItem('user');
         removeItem('accessToken');
         router.push('/auth/login');
-    }
+    },
+    async getStudent(context){
+        context.commit('getStudentStart');
+        try {
+            const response = (await authApi.getStudent()).data;
+            context.commit('getStudentSuccess',response.data)
+        } 
+        catch (error) {
+            context.commit('getStudentFailure',error.response.data.errors);
+        }
+    },
+    
 }
 
 export default{
