@@ -21,7 +21,10 @@
                             </span>
                             <hr>
                             <ul class="nav nav-pills flex-column mb-auto">
-                                <li class="nav-item">
+                                <li 
+                                    class="nav-item"
+                                    v-if="isAdmin"    
+                                >
                                     <router-link 
                                         class="nav-link link-dark" 
                                         to="/admin-dashboard"
@@ -31,9 +34,22 @@
                                         Dashboard
                                     </router-link>
                                 </li>
+                                <li 
+                                    class="nav-item"
+                                    v-if="isAssesser"    
+                                >
+                                    <router-link 
+                                        class="nav-link link-dark" 
+                                        to="/assesser"
+                                        exact 
+                                        @click="hide"
+                                    >
+                                        Dashboard
+                                    </router-link>
+                                </li>
+                                
                                 <li class="nav-item">
                                     <router-link 
-                                        v-if="isAdmin"
                                         class="nav-link link-dark" 
                                         to="profile" 
                                         @click="hide"
@@ -75,7 +91,7 @@ export default {
         document.body.removeChild(this.jQueryJs);
     },
     computed:{
-        ...mapGetters('auth',['isAdmin'])
+        ...mapGetters('auth',['isAdmin','isAssesser'])
     },
     methods:{
         ...mapActions('auth',['logout'])
