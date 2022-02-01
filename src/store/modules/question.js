@@ -11,6 +11,7 @@ const state = {
         created_at: '',
         updated_at: '',
         question: '',
+        category_id: '',
         level_id: '',
         resource_id: '',
         type_id: '',
@@ -70,6 +71,9 @@ const mutations = {
     updateQuestion(state,payload){
         state.currentQuestion.question = payload;
     },
+    updateCategory(state,payload){
+        state.currentQuestion.category_id = payload;
+    },
     setCurrentQuestionNull(state){
         state.currentQuestion = {
             id: '',
@@ -78,6 +82,7 @@ const mutations = {
             question: '',
             level_id: '',
             resource_id: '',
+            category_id: '',
             type_id: '',
             qp_id: '',
             is_active: '',
@@ -177,6 +182,7 @@ const actions = {
         try {
             const response = (await questionApi.addQuestion(context.state.currentQuestion)).data;
             context.commit('addQuestionSuccess',response.data)
+            context.commit('updateResourceId',null);
         } 
         catch (error) {
             context.commit('addQuestionFailure',error.response.data.errors);

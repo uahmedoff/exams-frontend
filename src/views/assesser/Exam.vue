@@ -28,7 +28,7 @@
                     </h2>
 
                     <div v-for="question,index in questions" :key="index">
-                        <template v-if="question.qresource.src">
+                        <template v-if="question.qresource && question.qresource.src">
                             <video 
                                 v-if="question.qresource.src && question.qresource.type_id == 1"
                                 controls
@@ -49,17 +49,38 @@
                                 class="card-img-top" 
                             >
                         </template>
-                        <h3 class="mt-4">{{ question.question }}</h3>
-                        <p v-for="answer,index in question.answers" :key="index">
-                            <label>
-                                <input 
-                                    type="radio" 
-                                    v-model="question_answers[question.id-1]" 
-                                    :value="question.id + '_' + answer.id + '_' + answer.answer + '_' + answer.is_correct" 
-                                /> {{ answer.answer }}
-                            </label>
-                        </p>
+                        <h3
+                            v-else-if="question.qresource.type_id == 4"
+                        >
+                            {{question.qresource.text}}
+                        </h3>
+                        <h4 class="mt-4">{{ question.question }}</h4>
+                        
+                        <template v-if="question_type_id == 5">
+                            <audio-recorder
+                                upload-url="/url/to/upload"
+                                :attempts="3"
+                                :time="2"
+                            />
+                        </template>
+                        <template v-else>
+                            <p v-for="answer,index in question.answers" :key="index">
+                                <label v-if="answer.type_id == 2 || answer.type_id == 3">
+                                    <input 
+                                        type="radio" 
+                                        v-model="question_answers[question.id]" 
+                                        :value="question.id + '_' + answer.id + '_' + answer.answer + '_' + answer.is_correct" 
+                                    /> {{ answer.answer }}
+                                </label>
+                                <label v-else-if="answer.type_id == 1">
+                                    <input 
+                                        v-model="question_typed_correct_answers[question.id]"
+                                    /> 
+                                </label>
+                            </p>
+                        </template>
                     </div>
+
                     <button 
                         v-if="question_type_id"
                         class="btn bg-success text-white mt-3 mb-5"   
@@ -72,9 +93,12 @@
         </div>
     </div>
 </template>
+
 <script>
 import api from '@/api/axios'
 import { getItem } from '@/helpers/localStorage'
+import { questionTypes } from '@/constants/config'
+
 export default {
     data(){
         return {
@@ -83,14 +107,18 @@ export default {
             questions: [],
             question_answers: [],
             question_types: [],
+            question_typed_correct_answers: [],
             question_type_id: '',
             apiUrl: process.env.VUE_APP_API_URL,
+            typed_answer: '',
+            questionTypes: questionTypes
         }
     },
     mounted(){
         this.student = getItem('student');
         this.getQuestionTypes();
         // this.getQuestions();
+        
     },
     methods:{
         async getQuestions(){
@@ -107,12 +135,18 @@ export default {
             this.question_types = (await api.get(`question-type`)).data.data;
         },
         async saveAnswers(){
-            await api.post(`result`,{
+            // console.log(this.question_typed_correct_answers);
+            // return;
+            let data = {
                 exam_id: this.$route.params.exam_id,
                 question_answers: this.question_answers,
                 level: this.student.currentLevel,
+                question_typed_correct_answers: this.question_typed_correct_answers,
                 question_type_id: this.question_type_id
-            });
+            };
+
+            // console.log(data);
+            await api.post(`result`,data);
             alert("Quiz answers were succesfully saved!");
         }
     }

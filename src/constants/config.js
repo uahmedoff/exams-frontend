@@ -20,3 +20,14 @@ export const resourceTypes = {
     Text: 4,
 }
 
+export const answerTypes = {
+    gapFilling: 1,
+    multipleChoice: 2,
+    chooseCorrectOption: 3,
+    writeTheMissingLetters: 4,
+    fillGapsWithGivenWords: 5,
+    matchQuestions: 6,
+    completeTheSentencesWithArticles: 7,
+    completeTheSentencesWithVerbs: 8,
+}
+

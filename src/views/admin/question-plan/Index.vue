@@ -6,12 +6,9 @@
 
                 <router-link class="btn btn-secondary btn-sm" :to="`/admin-dashboard/level/${$route.params.level_id}/type/${$route.params.question_type}`">Back</router-link>
                 
-                <!-- {{ currentResource }}<br>
-                {{ questionPlan.resource_id }} -->
-
                 <div class="mt-5">
-                    <!-- {{ questionPlan }} -->
 
+                    <!-- Resource -->
                     <table 
                         v-if="questionType.resource_types && questionType.resource_types.length"
                         class="table table-bordered table-condensed table-hover" 
@@ -87,21 +84,26 @@
                                     Your browser does not support the video tag.
                                 </video> 
                                 <audio 
-                                    v-if="questionPlan.qresource.src && questionPlan.qresource.type_id == 2"
+                                    v-else-if="questionPlan.qresource.src && questionPlan.qresource.type_id == 2"
                                     controls
                                 >
                                     <source :src="`${apiUrl}/storage/${questionPlan.qresource.src}`" type="audio/mpeg">
                                     Your browser does not support the audio tag.
                                 </audio> 
                                 <img 
-                                    v-if="questionPlan.qresource.src && questionPlan.qresource.type_id == 3"
+                                    v-else-if="questionPlan.qresource.src && questionPlan.qresource.type_id == 3"
                                     :src="`${apiUrl}/storage${questionPlan.qresource.src}`" 
                                     class="card-img-top" 
                                 >
+                                <h6
+                                    v-else-if="questionPlan.qresource.type_id == 4"
+                                >
+                                    {{questionPlan.qresource.text}}
+                                </h6>
                             </td>
                             <td>
                                 <a 
-                                    v-if="questionPlan.resource_id"
+                                    v-if="questionPlan.resource_id && questionPlan.qresource.src"
                                     href="#" 
                                     @click.prevent="deleteFile(questionPlan.resource_id)"
                                     class="btn bg-danger text-white btn-sm"
@@ -125,6 +127,7 @@
                         </tr>
                     </table>
 
+                    <!-- Question -->
                     <table 
                         class="table table-bordered table-condensed table-hover mt-5"
                         style="border:1px solid #555!important"
@@ -136,7 +139,16 @@
                                 <span v-else>❌</span>
                             </th>
                             <th>
-                                
+                                <template v-if="$route.params.question_type == 5">
+                                    Difficulty:
+                                    <select 
+                                        v-model="question_category_id"
+                                    >
+                                        <option value="1">Easy</option>
+                                        <option value="2">Medium</option>
+                                        <option value="3">Difficult</option>
+                                    </select>
+                                </template>
                             </th>
                             <th>
                                 <a 
@@ -157,7 +169,8 @@
                                     id="text" 
                                     v-model="question_text" 
                                     placeholder="Text"
-                                ></textarea>
+                                >
+                                </textarea>
                             </td>
                             <td>
                                 <a 
@@ -179,10 +192,6 @@
                     >
                         <tr>
                             <th>
-                                Answer: {{ currentAnswer.answer }}<br>
-                                Type id: {{ currentAnswer.type_id }} - {{ this.answerTypeId }}<br>
-                                Is correct:{{ currentAnswer.is_correct }}<br>
-                                <br>
                                 Answer 
                                 <span v-if="
                                     questionPlan.question_id && 
@@ -305,6 +314,14 @@ export default {
                 this.$store.commit('resource/updateText', value);
             }
         },
+        question_category_id: {
+            get () {
+                return this.currentQuestion.category_id;
+            },
+            set (value){
+                this.$store.commit('question/updateCategory', value);
+            }
+        },
         question_text:{
             get () {
                 return this.currentQuestion.question;
@@ -416,8 +433,10 @@ export default {
             else{
                 await this.addQuestion();
             }
-            if(!this.validationErrors)
+            if(!this.validationErrors){
                 await this.getQuestionPlan(this.$route.params.qp_id);   
+                this.$store.commit('question/updateResourceId', null);
+            }
         },
         async saveAnswer(){            
             await this.addAnswer();
