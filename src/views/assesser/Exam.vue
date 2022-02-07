@@ -126,6 +126,9 @@ export default {
             token: getItem('accessToken'),
         }
     },
+    beforeMount() {
+        window.addEventListener("beforeunload", this.preventNav)
+    },
     mounted(){
         this.stopTimer();
         this.student = getItem('student');
@@ -134,13 +137,73 @@ export default {
         this.startTimer();
     },
     methods:{
+        // preventNav(event) {
+        //     // if (!this.isEditing) return
+        //     // event.preventDefault()
+        //     event.returnValue = "Are you sure that you want to go back?";
+        //     window.location.href="/assesser";
+        // },
         async getQuestions(){
+            let limit;
+            switch(this.student.current_level){
+                case 'Beginner Mid':{
+                    if(this.question_type_id == 3){
+                        limit = 40;
+                    }
+                    else if(this.question_type_id == 4){
+                        limit = 40;
+                    }
+                    else if(this.question_type_id == 5){
+                        limit = 10;
+                    }
+                }
+                break;
+                case 'Beginner Final':{
+                    if(this.question_type_id == 3){
+                        limit = 20;
+                    }
+                    else if(this.question_type_id == 4){
+                        limit = 20;
+                    }
+                    else if(this.question_type_id == 2){
+                        limit = 10;
+                    }
+                    else if(this.question_type_id == 5){
+                        limit = 8;
+                    }
+                    else if(this.question_type_id == 6){
+                        limit = 1;
+                    }
+                }
+                break;
+                default:{
+                    if(this.question_type_id == 1){
+                        limit = 5;
+                    }
+                    if(this.question_type_id == 3){
+                        limit = 20;
+                    }
+                    else if(this.question_type_id == 4){
+                        limit = 20;
+                    }
+                    else if(this.question_type_id == 2){
+                        limit = 5;
+                    }
+                    else if(this.question_type_id == 5){
+                        limit = 8;
+                    }
+                    else if(this.question_type_id == 6){
+                        limit = 1;
+                    }
+                }
+                break;
+            }
             this.questions = (await api.get(`question`,{
                 params:{
                     level: this.student.current_level,
                     type_id: this.question_type_id,
                     order: 'rand',
-                    limit: 10
+                    limit: limit
                 }
             })).data.data;
             // this.startTimer();
