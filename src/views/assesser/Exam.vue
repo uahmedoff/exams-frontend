@@ -9,7 +9,8 @@
                         <!-- {{student.group}} -  -->
                         {{student.current_level}}</h3>
                     <h1 class="mt-3">
-                        START. 
+                        START.  <br>
+                        <span class="color-red">{{  timer.minutes  }} : {{ timer.seconds }}</span>
                         <!-- You have 80 minutes for the exam -->
                     </h1>
                     <h2 class="mt-5">#  
@@ -43,14 +44,17 @@
                                 <source :src="`${apiUrl}/storage/${question.qresource.src}`" type="audio/mpeg">
                                 Your browser does not support the audio tag.
                             </audio> 
-                            <img 
-                                v-if="question.qresource.src && question.qresource.type_id == 3"
-                                :src="`${apiUrl}/storage${question.qresource.src}`" 
-                                class="card-img-top" 
-                            >
+                            <center>
+                                <img 
+                                    v-if="question.qresource.src && question.qresource.type_id == 3"
+                                    :src="`${apiUrl}/storage${question.qresource.src}`" 
+                                    class="card-img-top" 
+                                    style="max-width:400px"
+                                >
+                            </center>
                         </template>
                         <h3
-                            v-else-if="question.qresource.type_id == 4"
+                            v-else-if="question.qresource && question.qresource.type_id == 4"
                         >
                             {{question.qresource.text}}
                         </h3>
@@ -58,7 +62,10 @@
                         
                         <template v-if="question_type_id == 5">
                             <audio-recorder
-                                upload-url="/url/to/upload"
+                                :upload-url="apiUrl+'/v1/student/'+student.id+'/exam/'+$route.params.exam_id+'/question/'+question.id+'/upload'"
+                                :headers="{
+                                    Authorization: 'Bearer ' + token
+                                }"
                                 :attempts="3"
                                 :time="2"
                             />
@@ -82,7 +89,7 @@
                     </div>
 
                     <button 
-                        v-if="question_type_id"
+                        v-if="question_type_id && questions.length"
                         class="btn bg-success text-white mt-3 mb-5"   
                         @click.prevent="saveAnswers"
                     >
@@ -102,6 +109,10 @@ import { questionTypes } from '@/constants/config'
 export default {
     data(){
         return {
+            timer: {
+                minutes: 79,
+                seconds: 60
+            },
             isLoading: '',
             student: '',
             questions: [],
@@ -111,14 +122,16 @@ export default {
             question_type_id: '',
             apiUrl: process.env.VUE_APP_API_URL,
             typed_answer: '',
-            questionTypes: questionTypes
+            questionTypes: questionTypes,
+            token: getItem('accessToken'),
         }
     },
     mounted(){
+        this.stopTimer();
         this.student = getItem('student');
         this.getQuestionTypes();
         // this.getQuestions();
-        
+        this.startTimer();
     },
     methods:{
         async getQuestions(){
@@ -130,13 +143,12 @@ export default {
                     limit: 10
                 }
             })).data.data;
+            // this.startTimer();
         },
         async getQuestionTypes(){
             this.question_types = (await api.get(`question-type`)).data.data;
         },
-        async saveAnswers(){
-            // console.log(this.question_typed_correct_answers);
-            // return;
+        async saveAnswers(){            
             let data = {
                 exam_id: this.$route.params.exam_id,
                 question_answers: this.question_answers,
@@ -144,11 +156,35 @@ export default {
                 question_typed_correct_answers: this.question_typed_correct_answers,
                 question_type_id: this.question_type_id
             };
-
-            // console.log(data);
             await api.post(`result`,data);
             alert("Quiz answers were succesfully saved!");
+        },
+        startTimer(){
+            var timer;
+            this.timer.seconds--; 
+            if (this.timer.seconds < 0){
+                this.timer.minutes--;
+                if (this.timer.minutes >= 0){
+                    this.timer.seconds = 60;
+                    this.timer.seconds--; 
+                }
+                else{
+                    clearTimeout(timer); 
+                    this.showResults();
+                    return false;
+                }
+            }              
+            timer = setTimeout(this.startTimer, 1000);
+        }, 
+        stopTimer(){
+            clearTimeout(this.startTimer);
         }
     }
 }
 </script>
+
+<style lang="scss" scoped>
+    .color-red{
+        color:red;
+    }
+</style>
