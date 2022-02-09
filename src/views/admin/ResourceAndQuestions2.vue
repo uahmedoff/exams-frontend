@@ -6,7 +6,7 @@
             <div class="col-lg-12">
                 <h3>{{level.name}} - {{ capitalized(questionType.name) }}</h3>
 
-                <router-link class="btn btn-secondary btn-sm mb-2" :to="`/admin-dashboard`">Back</router-link> &nbsp;
+                <router-link class="btn btn-secondary btn-sm mb-2" :to="`/admin-dashboard/level/${$route.params.level_id}/type/${$route.params.question_type}`">Back</router-link> &nbsp;
 
                 <template v-if="numberOfQuestionPlans">
                     <h4 class="badge bg-secondary">{{ numberOfQuestionPlans.with_questions }}</h4>
@@ -83,7 +83,7 @@
                         </td>
                         <td>
                             <router-link 
-                                :to="`/admin-dashboard/level/${level.id}/type/${questionType.id}/qp/${qp.id}/fill`"
+                                :to="`/admin-dashboard/level/${level.id}/type/${questionType.id}/folder/${$route.params.folder_id}/qp/${qp.id}/fill`"
                                 class="btn btn-success btn-sm"
                             >
                                 +
@@ -155,6 +155,7 @@ export default {
             await this.getQuestionPlans({
                 level_id: this.$route.params.level_id,
                 question_type_id: this.$route.params.question_type,
+                folder_id: this.$route.params.folder_id,
                 order: "desc",
                 page: pageNum
             });
@@ -162,7 +163,8 @@ export default {
         async addQP(){
             await this.addQuestionPlan({
                 level_id: this.$route.params.level_id,
-                question_type_id: this.$route.params.question_type
+                question_type_id: this.$route.params.question_type,
+                folder_id: this.$route.params.folder_id,
             });
             await this.loadPage()
         },

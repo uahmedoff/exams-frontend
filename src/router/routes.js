@@ -62,7 +62,7 @@ const routes = [
           ]
         },
         {
-          path: "level/:level_id/type/:question_type/qp/:qp_id/fill",
+          path: "level/:level_id/type/:question_type/folder/:folder_id/qp/:qp_id/fill",
           name: "QuestionPlan",
           component: () =>
             import("@/views/admin/question-plan/Index.vue"),
@@ -98,10 +98,16 @@ const routes = [
           ]
         },
         {
-          path: "level/:level_id/type/:question_type",
+          path: "level/:level_id/type/:question_type/folder/:folder_id",
           name: "ResourceAndQuestionsByLevelAndType",
           component: () =>
             import("@/views/admin/ResourceAndQuestions2.vue"),
+        },
+        {
+          path: "level/:level_id/type/:question_type",
+          name: "ResourceAndQuestionsByLevelAndType",
+          component: () =>
+            import("@/views/admin/folder/Index.vue"),
         },
       ]
     },

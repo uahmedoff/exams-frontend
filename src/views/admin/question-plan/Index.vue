@@ -4,7 +4,7 @@
             <div class="col-lg-12 mt-3">
                 <h3>{{level.name}} - {{ capitalized(questionType.name) }}</h3>
 
-                <router-link class="btn btn-secondary btn-sm" :to="`/admin-dashboard/level/${$route.params.level_id}/type/${$route.params.question_type}`">Back</router-link>
+                <router-link class="btn btn-secondary btn-sm" :to="`/admin-dashboard/level/${$route.params.level_id}/type/${$route.params.question_type}/folder/${$route.params.folder_id}`">Back</router-link>
                 
                 <div class="mt-5">
 
