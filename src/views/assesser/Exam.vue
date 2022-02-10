@@ -24,6 +24,7 @@
                             <select 
                                 v-model="question_type_id"
                                 @change.prevent="getQuestions"
+                                disabled
                             >
                                 <option 
                                     v-for="type,index in question_types" 
@@ -63,7 +64,7 @@
                             <h3
                                 v-else-if="question.qresource && question.qresource.type_id == 4"
                             >
-                                {{question.qresource.text}}
+                               {{ ++index }}. {{question.qresource.text}}
                             </h3>
                             <h4 class="mt-4">{{ question.question }}</h4>
                             
@@ -76,6 +77,9 @@
                                     :attempts="3"
                                     :time="2"
                                 />
+                            </template>
+                            <template v-else-if="question_type_id == 6">
+                                <input type="file" class="form-control form-control-sm" id="file" placeholder="File" @change="fileChanged">
                             </template>
                             <template v-else>
                                 <p v-for="answer,index in question.answers" :key="index">
@@ -102,7 +106,7 @@
                             </template>
                         </div>
                         <button 
-                            v-if="question_type_id && questions.length"
+                            v-if="question_type_id"
                             class="btn bg-success text-white mt-3 mb-5"   
                             @click.prevent="saveAnswers"
                         >
@@ -127,6 +131,7 @@ export default {
                 minutes: 79,
                 seconds: 60
             },
+            image: '',
             isLoading: '',
             student: '',
             questions: [],
@@ -145,6 +150,7 @@ export default {
         window.addEventListener("beforeunload", this.preventNav)
     },
     mounted(){
+        this.question_type_id = 1;
         this.stopTimer();
         this.clearResult();
         this.student = getItem('student');
@@ -228,16 +234,30 @@ export default {
         async getQuestionTypes(){
             this.question_types = (await api.get(`question-type`)).data.data;
         },
-        async saveAnswers(){            
-            let data = {
-                exam_id: this.$route.params.exam_id,
-                question_answers: this.question_answers,
-                level: this.student.currentLevel,
-                question_typed_correct_answers: this.question_typed_correct_answers,
-                question_type_id: this.question_type_id
-            };
-            await api.post(`result`,data);
+        async saveAnswers(){ 
+            if(this.questions.length){
+                let data = {
+                    exam_id: this.$route.params.exam_id,
+                    question_answers: this.question_answers,
+                    level: this.student.currentLevel,
+                    question_typed_correct_answers: this.question_typed_correct_answers,
+                    question_type_id: this.question_type_id,
+                    image: this.image,
+                    question_id: this.questions[0].id
+                };
+                await api.post(`result`,data);
+            }           
+            if(this.question_type_id<6)
+                this.question_type_id += 1;
             alert("Quiz answers were succesfully saved!");
+            this.getQuestions();
+        },
+        fileChanged(e){
+            let fileReader = new FileReader();            
+            fileReader.readAsDataURL(e.target.files[0]);
+            fileReader.onload = (e) => {
+                this.image = e.target.result;
+            }
         },
         startTimer(){
             var timer;
