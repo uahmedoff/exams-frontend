@@ -11,7 +11,6 @@
                     </h3>
                         
                     <h3 v-if="timer.minutes<=0 && timer.seconds<=0">
-                        Time is over
                         <router-link to="/assesser">Start new quiz</router-link>
                     </h3>
                     <template v-else>
@@ -64,9 +63,9 @@
                             <h3
                                 v-else-if="question.qresource && question.qresource.type_id == 4"
                             >
-                               {{ ++index }}. {{question.qresource.text}}
+                                {{question.qresource.text}}
                             </h3>
-                            <h4 class="mt-4">{{ question.question }}</h4>
+                            <h4 class="mt-4">{{ ++index }}. {{ question.question }}</h4>
                             
                             <template v-if="question_type_id == 5">
                                 <audio-recorder
@@ -110,7 +109,12 @@
                             class="btn bg-success text-white mt-3 mb-5"   
                             @click.prevent="saveAnswers"
                         >
-                            Save
+                            <template v-if="question_type_id<6">
+                                Next
+                            </template>
+                            <template v-else>
+                                Save
+                            </template>
                         </button>
                     </template>
                 </template>
@@ -243,13 +247,18 @@ export default {
                     question_typed_correct_answers: this.question_typed_correct_answers,
                     question_type_id: this.question_type_id,
                     image: this.image,
-                    question_id: this.questions[0].id
+                    question_id: this.questions[0].id,
                 };
                 await api.post(`result`,data);
             }           
-            if(this.question_type_id<6)
+            if(this.question_type_id < 6)
                 this.question_type_id += 1;
-            alert("Quiz answers were succesfully saved!");
+            else{
+                this.timer.minutes = -1;
+                this.timer.seconds = -1;
+                await api.post(`exam/${this.$route.params.exam_id}/set-finished`);  
+                alert("Quiz answers were succesfully saved!");
+            }
             this.getQuestions();
         },
         fileChanged(e){
@@ -270,7 +279,6 @@ export default {
                 }
                 else{
                     clearTimeout(timer); 
-                    this.showResults();
                     return false;
                 }
             }              

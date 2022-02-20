@@ -26,6 +26,18 @@ const routes = [
             import("@/views/admin/Dashboard.vue"),
         },
         {
+          path: "test",
+          name: "Test",
+          component: () =>
+            import("@/views/admin/Test.vue"),
+        },
+        {
+          path: "test2",
+          name: "Test2",
+          component: () =>
+            import("@/views/admin/Test2.vue"),
+        },
+        {
           path: "level/:level_id/type/:question_type/qp/:qp_id/resource",
           name: "Resource",
           component: () =>
@@ -132,6 +144,40 @@ const routes = [
             import("@/views/assesser/Exam.vue"),
         },
       ]  
+    },
+    {
+      path: "/invigilator",
+      name: "InvigilatorMain",
+      component: () => import("@/layouts/Main.vue"),
+      meta: {
+        requiresAuth: true,
+      },      
+      children: [
+        {
+          path: "",
+          name: "InvigilatorHome",
+          component: () =>
+            import("@/views/invigilator/Index.vue"),
+        },
+        {
+          path: "checking-page",
+          name: "InvigilatorCheckingPage",
+          component: () =>
+            import("@/views/invigilator/CheckingPage.vue"),
+        },
+        {
+          path: "checking-examgroup/:examgroup_id",
+          name: "InvigilatorCheckingExamgroup",
+          component: () =>
+            import("@/views/invigilator/CheckingExams.vue"),
+        },
+        {
+          path: "ceg/:examgroup_id/result/:result_id/mark",
+          name: "InvigilatorMarkExam",
+          component: () =>
+            import("@/views/invigilator/Mark.vue"),
+        }
+      ] 
     },
     {
       path: "/",

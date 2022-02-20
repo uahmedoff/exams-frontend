@@ -47,8 +47,36 @@
                                         Dashboard
                                     </router-link>
                                 </li>
+                                <li 
+                                    class="nav-item"
+                                    v-if="isInvigilator"    
+                                >
+                                    <router-link 
+                                        class="nav-link link-dark" 
+                                        to="/invigilator"
+                                        exact 
+                                        @click="hide"
+                                    >
+                                        New exams 
+                                        <span class="badge rounded-pill bg-secondary">{{examgroupStore.getters.numberOfNewExamGroups.value}}</span>
+                                    </router-link>
+                                </li>
+                                <li 
+                                    class="nav-item"
+                                    v-if="isInvigilator"    
+                                >
+                                    <router-link 
+                                        class="nav-link link-dark" 
+                                        to="/invigilator/checking-page"
+                                        exact 
+                                        @click="hide"
+                                    >
+                                        Checking Page
+                                        <span class="badge rounded-pill bg-secondary">{{examgroupStore.getters.numberOfCheckingExamGroups.value}}</span>
+                                    </router-link>
+                                </li>
                                 
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <router-link 
                                         class="nav-link link-dark" 
                                         to="profile" 
@@ -56,7 +84,7 @@
                                     >
                                         Profile
                                     </router-link>
-                                </li>
+                                </li> -->
                             </ul>
                             <hr>
                         </div>
@@ -73,7 +101,13 @@
 
 <script>
 import {mapGetters,mapActions} from 'vuex'
+import {store as examgroupStore} from '@/store/modules/examgroup'
 export default {
+    data(){
+        return {
+            examgroupStore
+        }
+    },
     mounted(){
         this.dashboardCss = document.createElement('link')
         this.dashboardCss.setAttribute('href', 'https://getbootstrap.com/docs/5.1/examples/dashboard/dashboard.css')
@@ -85,13 +119,16 @@ export default {
         this.jQueryJs.setAttribute('integrity', 'sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj')
         this.jQueryJs.setAttribute('crossorigin', 'anonymous')
         document.body.appendChild(this.jQueryJs);
+
+        examgroupStore.methods.getNewExamgroups();
+        examgroupStore.methods.getCheckingExamgroups();
     },
     destroyed(){
         document.head.removeChild(this.dashboardCss);
         document.body.removeChild(this.jQueryJs);
     },
     computed:{
-        ...mapGetters('auth',['isAdmin','isAssesser'])
+        ...mapGetters('auth',['isAdmin','isAssesser','isInvigilator'])
     },
     methods:{
         ...mapActions('auth',['logout'])

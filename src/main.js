@@ -7,6 +7,9 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import {initialize} from './helpers/general';
 import AudioRecorder from 'vue-audio-recorder'
 import VueResource from "vue-resource"
+import VueCompositionAPI from '@vue/composition-api'
+
+Vue.use(VueCompositionAPI)
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'

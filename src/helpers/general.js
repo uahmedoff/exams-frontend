@@ -7,6 +7,7 @@ export function initialize(store, router) {
         const currentUser = !!(store.state.auth.currentUser || getItem('user'));
         const isAdmin =  store.getters["auth/isAdmin"];
         const isAssesser =  store.getters["auth/isAssesser"];
+        const isInvigilator =  store.getters["auth/isInvigilator"];
         if(requiresAuth && !currentUser) {
             next('/auth/login');
         }
@@ -18,6 +19,9 @@ export function initialize(store, router) {
         }
         else if(isAssesser && to.path == '/'){
             next('/assesser');
+        }
+        else if(isInvigilator && to.path == '/'){
+            next('/invigilator');
         }
         else {
             next();

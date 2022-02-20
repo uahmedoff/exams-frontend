@@ -47,7 +47,8 @@ export default {
             this.exam = (await api.post(`exam`,{
                 student_id: this.student.id,
                 level_name: this.student.current_level,
-                group: this.student.group    
+                group: this.student.group, 
+                group_id: this.student.group_id   
             })).data;
             setTimeout(() => {
                 this.$router.push(`/assesser/exam/${this.exam.id}`);
