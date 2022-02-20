@@ -12,49 +12,55 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <audio 
-                    v-if="resultStore.state.result.file.split('.').pop() == 'mp3'"
-                    controls
-                >
-                    <source :src="`${apiUrl}/storage/${resultStore.state.result.file}`" type="audio/mpeg">
-                    Your browser does not support the audio tag.
-                </audio> 
-                <center>
-                    <img 
-                        v-if="
-                            resultStore.state.result.file.split('.').pop() == 'jpg' || 
-                            resultStore.state.result.file.split('.').pop() == 'png'
-                        "
-                        :src="`${apiUrl}/storage/${resultStore.state.result.file}`" 
-                        class="card-img-top" 
+                <b-card v-if="resultStore.state.isLoading">
+                    <b-skeleton width="85%"></b-skeleton>
+                    <b-skeleton width="55%"></b-skeleton>
+                    <b-skeleton width="70%"></b-skeleton>
+                </b-card>
+                <template v-else>
+                    <audio 
+                        v-if="resultStore.state.result.file.split('.').pop() == 'mp3'"
+                        controls
                     >
-                </center>
+                        <source :src="`${apiUrl}/storage/${resultStore.state.result.file}`" type="audio/mpeg">
+                        Your browser does not support the audio tag.
+                    </audio> 
+                    <center>
+                        <img 
+                            v-if="
+                                resultStore.state.result.file.split('.').pop() == 'jpg' || 
+                                resultStore.state.result.file.split('.').pop() == 'png'
+                            "
+                            :src="`${apiUrl}/storage/${resultStore.state.result.file}`" 
+                            class="card-img-top" 
+                        >
+                    </center>
 
-                <b-form @submit.prevent="save">
-                    <b-form-group
-                        id="input-group-1"
-                        label="Score:"
-                        label-for="input-1"
-                    >
-                        <b-form-input
-                        id="input-1"
-                        v-model="resultStore.state.result.score"
-                        type="text"
-                        placeholder="Enter score"
-                        required
-                        ></b-form-input>
-                    </b-form-group>
+                    <b-form @submit.prevent="save">
+                        <b-form-group
+                            id="input-group-1"
+                            label="Score:"
+                            label-for="input-1"
+                        >
+                            <b-form-input
+                            id="input-1"
+                            v-model="resultStore.state.result.score"
+                            type="text"
+                            placeholder="Enter score"
+                            required
+                            ></b-form-input>
+                        </b-form-group>
 
-                    <b-form-group id="input-group-2" label="Comment:" label-for="input-2">
-                        <b-form-textarea
-                        id="input-2"
-                        v-model="resultStore.state.result.comment"
-                        placeholder="Enter comment"
-                        ></b-form-textarea>
-                    </b-form-group>
-                    <b-button type="submit" variant="success" class="mt-2 mb-3">Save</b-button>
-                </b-form>    
-
+                        <b-form-group id="input-group-2" label="Comment:" label-for="input-2">
+                            <b-form-textarea
+                            id="input-2"
+                            v-model="resultStore.state.result.comment"
+                            placeholder="Enter comment"
+                            ></b-form-textarea>
+                        </b-form-group>
+                        <b-button type="submit" variant="success" class="mt-2 mb-3">Save</b-button>
+                    </b-form>    
+                </template>
             </div>
         </div>
     </div>
