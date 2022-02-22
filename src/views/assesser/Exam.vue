@@ -153,12 +153,13 @@ export default {
     beforeMount() {
         window.addEventListener("beforeunload", this.preventNav)
     },
-    mounted(){
+    async mounted(){
         this.question_type_id = 1;
+        await this.getQuestionTypes();
+        await this.getQuestions();
         this.stopTimer();
         this.clearResult();
         this.student = getItem('student');
-        this.getQuestionTypes();
         // this.getQuestions();
         this.startTimer();
     },
