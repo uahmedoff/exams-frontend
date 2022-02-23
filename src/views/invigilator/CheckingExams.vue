@@ -134,7 +134,7 @@ export default {
         }
     },
     mounted(){
-        examsStore.methods.getNewExamgroups(this.$route.params.examgroup_id);
+        examsStore.methods.getNewExamgroups(this.$route.params.examgroup_id,true);
     }
 }
 </script>

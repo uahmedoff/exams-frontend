@@ -26,16 +26,16 @@ const routes = [
             import("@/views/admin/Dashboard.vue"),
         },
         {
-          path: "test",
-          name: "Test",
+          path: "exam-results",
+          name: "ExamResults",
           component: () =>
-            import("@/views/admin/Test.vue"),
+            import("@/views/admin/exam-results/Index.vue"),
         },
         {
-          path: "test2",
-          name: "Test2",
+          path: "exam-group/:eg_id/exam-results",
+          name: "ExamGroupResults",
           component: () =>
-            import("@/views/admin/Test2.vue"),
+            import("@/views/admin/exam-results/ExamroupResults.vue"),
         },
         {
           path: "level/:level_id/type/:question_type/qp/:qp_id/resource",

@@ -5,6 +5,8 @@ const state = reactive({
     isLoading:false,
     newexamgroups: [],
     checkingexamgroups: [],
+    allCheckingExamgroups: {},
+    examgroup: {},
     errors: null
 })
 
@@ -35,6 +37,32 @@ const methods = {
         state.isLoading = true;
         try {
             state.checkingexamgroups = (await api.get(`examgroup/checking-ones`)).data.data;
+        } 
+        catch (error) {
+            state.errors = error.response.data.errors;
+        }
+        state.isLoading = false;
+    },
+
+    async getAllCheckingExamgroups(from,till,page) {
+        state.isLoading = true;
+        try {
+            state.allCheckingExamgroups = (await api.get(`examgroup/checking-exams/${from}/${till}`,{
+                params:{
+                    page
+                }
+            })).data;
+        } 
+        catch (error) {
+            state.errors = error.response.data.errors;
+        }
+        state.isLoading = false;
+    },
+
+    async getExamgroup(examgroup_id) {
+        state.isLoading = true;
+        try {
+            state.examgroup = (await api.get(`examgroup/${examgroup_id}`)).data;
         } 
         catch (error) {
             state.errors = error.response.data.errors;

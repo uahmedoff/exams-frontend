@@ -8,10 +8,14 @@ const state = reactive({
 })
 
 const methods = {
-    async getNewExamgroups(examgroup_id) {
+    async getNewExamgroups(examgroup_id,onlyWithFile = false) {
         state.isLoading = true;
         try {
-            state.exams = (await api.get(`examgroup/${examgroup_id}/exams`)).data.data;
+            state.exams = (await api.get(`examgroup/${examgroup_id}/exams`,{
+                params:{
+                    onlyWithFile,
+                }
+            })).data.data;
         } 
         catch (error) {
             state.errors = error.response.data.errors;

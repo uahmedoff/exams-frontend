@@ -22,8 +22,8 @@
                             <hr>
                             <ul class="nav nav-pills flex-column mb-auto">
                                 <li 
-                                    class="nav-item"
                                     v-if="isAdmin"    
+                                    class="nav-item"
                                 >
                                     <router-link 
                                         class="nav-link link-dark" 
@@ -35,8 +35,21 @@
                                     </router-link>
                                 </li>
                                 <li 
+                                    v-if="isAdmin"    
                                     class="nav-item"
+                                >
+                                    <router-link 
+                                        class="nav-link link-dark" 
+                                        to="/admin-dashboard/exam-results"
+                                        exact 
+                                        @click="hide"
+                                    >
+                                        Exam results
+                                    </router-link>
+                                </li>
+                                <li 
                                     v-if="isAssesser"    
+                                    class="nav-item"
                                 >
                                     <router-link 
                                         class="nav-link link-dark" 
@@ -48,8 +61,8 @@
                                     </router-link>
                                 </li>
                                 <li 
-                                    class="nav-item"
                                     v-if="isInvigilator"    
+                                    class="nav-item"
                                 >
                                     <router-link 
                                         class="nav-link link-dark" 
@@ -62,8 +75,8 @@
                                     </router-link>
                                 </li>
                                 <li 
-                                    class="nav-item"
                                     v-if="isInvigilator"    
+                                    class="nav-item"
                                 >
                                     <router-link 
                                         class="nav-link link-dark" 
