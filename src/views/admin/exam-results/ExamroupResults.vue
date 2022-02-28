@@ -35,34 +35,34 @@
                                 <td>
                                     <ol>
                                         <li v-for="result,index in exam.results" :key="`result${index}`">
-                                            <span v-if="result.qresource">
+                                            <span v-if="result.question.qresource">
                                                 <video 
-                                                    v-if="result.qresource.src && result.qresource.type_id == 1"
+                                                    v-if="result.question.qresource.src && result.question.qresource.type_id == 1"
                                                     controls
                                                 >
-                                                    <source :src="`${apiUrl}/storage/${result.qresource.src}`" type="video/mp4">
+                                                    <source :src="`${apiUrl}/storage/${result.question.qresource.src}`" type="video/mp4">
                                                     Your browser does not support the video tag.
                                                 </video> 
                                                 <audio 
-                                                    v-else-if="result.qresource.src && result.qresource.type_id == 2"
+                                                    v-else-if="result.question.qresource.src && result.question.qresource.type_id == 2"
                                                     controls
                                                 >
-                                                    <source :src="`${apiUrl}/storage/${result.qresource.src}`" type="audio/mpeg">
+                                                    <source :src="`${apiUrl}/storage/${result.question.qresource.src}`" type="audio/mpeg">
                                                     Your browser does not support the audio tag.
                                                 </audio> 
                                                 <img 
-                                                    v-else-if="result.qresource.src && result.qresource.type_id == 3"
-                                                    :src="`${apiUrl}/storage${result.qresource.src}`" 
+                                                    v-else-if="result.question.qresource.src && result.question.qresource.type_id == 3"
+                                                    :src="`${apiUrl}/storage${result.question.qresource.src}`" 
                                                     class="card-img-top" 
                                                     style="max-width:400px"
                                                 >
                                                 <h6
-                                                    v-else-if="result.qresource.type_id == 4"
+                                                    v-else-if="result.question.qresource.type_id == 4"
                                                 >
-                                                    {{result.qresource.text}}
+                                                    {{result.question.qresource.text}}
                                                 </h6>
-                                                <div v-if="result.qresource.created_by">Admin: {{ result.qresource.created_by.name }}</div>
-                                                <div v-if="result.qresource.created_by">Edited by: {{ result.qresource.updated_by.name }}</div>
+                                                <div v-if="result.question.qresource.created_by">Admin: {{ result.question.qresource.created_by.name }}</div>
+                                                <div v-if="result.question.qresource.created_by">Edited by: {{ result.question.qresource.updated_by.name }}</div>
                                             </span>
                                             <hr />
                                             {{ result.question.question }}<br>
