@@ -25,6 +25,7 @@
                                 <th>#</th>
                                 <th>Student</th>
                                 <th>Question</th>
+                                <th>Total points</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,7 +35,7 @@
                                 <td>
                                     <ol>
                                         <li v-for="result,index in exam.results" :key="`result${index}`">
-                                            <span v-if="result.qresourse">
+                                            <span v-if="result.qresource">
                                                 <video 
                                                     v-if="result.qresource.src && result.qresource.type_id == 1"
                                                     controls
@@ -102,9 +103,13 @@
                                             </span>
                                             <span v-if="result.is_correct == 1">✅</span>
                                             <span v-else-if="result.is_correct == 0">❌</span>
-                                            Score: {{ result.score }}
+                                            Point: {{ result.score }}
+
                                         </li>
                                     </ol>
+                                </td>
+                                <td>
+                                    {{ totalScore(exam) }}
                                 </td>
                             </tr>
                         </tbody>
@@ -124,6 +129,18 @@ export default {
             examgroupStore,
             examStore,
             apiUrl: process.env.VUE_APP_API_URL,
+        }
+    },
+    computed:{
+        totalScore(){
+            return (exam) => {
+                let totalScore = 0;
+                exam.results.forEach((result) => {
+                    if(result.score)
+                        totalScore += parseFloat(result.score);
+                });
+                return totalScore;
+            };
         }
     },
     mounted(){

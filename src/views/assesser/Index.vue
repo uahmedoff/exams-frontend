@@ -1,27 +1,31 @@
 <template>
-    <div>
-        <h3>Please, type your phone number.</h3>
-        <input 
-            type="text" 
-            placeholder="901234567"
-            v-model="phone"
-            class="pb-1"
-            @keypress.enter="getStudent"
-        />
-        <button 
-            v-if="isLoading" 
-            class="btn btn-sm bg-success text-white ms-1 disabled"
-        >
-            <b-spinner small variant="light"></b-spinner>
-        </button>
-        <button 
-            v-else
-            v-show="phone"
-            @click.prevent="getStudent"
-            class="btn btn-sm bg-success text-white ms-1"
-        >
-            Start
-        </button>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="mt-5 mb-3">Please, type your phone number.</h3>
+                <input 
+                    type="text" 
+                    placeholder="901234567"
+                    v-model="phone"
+                    class="pb-1"
+                    @keypress.enter="getStudent"
+                />
+                <button 
+                    v-if="isLoading" 
+                    class="btn btn-sm bg-success text-white ms-1 disabled"
+                >
+                    <b-spinner small variant="light"></b-spinner>
+                </button>
+                <button 
+                    v-else
+                    v-show="phone"
+                    @click.prevent="getStudent"
+                    class="btn btn-sm bg-success text-white ms-1"
+                >
+                    Start
+                </button>
+            </div>
+        </div>
     </div>
 </template>
 

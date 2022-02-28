@@ -41,6 +41,11 @@ const getters = {
         }
         return exams;
     }),
+    st(){
+        return computed((id) => {
+            return id;
+        });
+    }, 
 }
 
 export const store = readonly({

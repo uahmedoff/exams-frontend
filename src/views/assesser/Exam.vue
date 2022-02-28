@@ -1,5 +1,5 @@
 <template>
-    <div class="container-sm">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <h3 v-if="isLoading">Loading...</h3>
@@ -19,103 +19,158 @@
                             <span class="color-red">{{  timer.minutes  }} : {{ timer.seconds }}</span>
                             <!-- You have 80 minutes for the exam -->
                         </h1>
-                        <h2 class="mt-5">#  
-                            <select 
-                                v-model="question_type_id"
-                                @change.prevent="getQuestions"
-                                disabled
+                        <template v-if="isQuestionsLoading">
+                            <b-skeleton width="85%"></b-skeleton>
+                            <b-skeleton width="55%"></b-skeleton>
+                            <b-skeleton width="70%"></b-skeleton>
+                            <b-skeleton width="90%"></b-skeleton>
+                            <b-skeleton width="60%"></b-skeleton>
+                            <b-skeleton width="75%"></b-skeleton>
+                            <b-skeleton width="80%"></b-skeleton>
+                            <b-skeleton width="50%"></b-skeleton>
+                            <b-skeleton width="65%"></b-skeleton>
+                            <b-skeleton width="85%"></b-skeleton>
+                            <b-skeleton width="55%"></b-skeleton>
+                            <b-skeleton width="70%"></b-skeleton>
+                            <b-skeleton width="90%"></b-skeleton>
+                            <b-skeleton width="60%"></b-skeleton>
+                            <b-skeleton width="75%"></b-skeleton>
+                            <b-skeleton width="80%"></b-skeleton>
+                            <b-skeleton width="50%"></b-skeleton>
+                            <b-skeleton width="65%"></b-skeleton>
+                            <b-skeleton width="85%"></b-skeleton>
+                            <b-skeleton width="55%"></b-skeleton>
+                            <b-skeleton width="70%"></b-skeleton>
+                            <b-skeleton width="90%"></b-skeleton>
+                            <b-skeleton width="60%"></b-skeleton>
+                            <b-skeleton width="75%"></b-skeleton>
+                            <b-skeleton width="80%"></b-skeleton>
+                            <b-skeleton width="50%"></b-skeleton>
+                            <b-skeleton width="65%"></b-skeleton>
+                            <b-skeleton width="85%"></b-skeleton>
+                            <b-skeleton width="55%"></b-skeleton>
+                            <b-skeleton width="70%"></b-skeleton>
+                            <b-skeleton width="90%"></b-skeleton>
+                            <b-skeleton width="60%"></b-skeleton>
+                            <b-skeleton width="75%"></b-skeleton>
+                            <b-skeleton width="80%"></b-skeleton>
+                            <b-skeleton width="50%"></b-skeleton>
+                            <b-skeleton width="65%"></b-skeleton>
+                            <b-skeleton width="85%"></b-skeleton>
+                            <b-skeleton width="55%"></b-skeleton>
+                            <b-skeleton width="70%"></b-skeleton>
+                            <b-skeleton width="90%"></b-skeleton>
+                            <b-skeleton width="60%"></b-skeleton>
+                            <b-skeleton width="75%"></b-skeleton>
+                            <b-skeleton width="80%"></b-skeleton>
+                            <b-skeleton width="50%"></b-skeleton>
+                            <b-skeleton width="65%"></b-skeleton>
+                            <button 
+                                type="button" 
+                                class="btn bg-success text-white mt-3 mb-5 disabled"
                             >
-                                <option 
-                                    v-for="type,index in question_types" 
+                                <b-spinner variant="light"></b-spinner>
+                            </button>
+                        </template>
+                        <template v-else>
+                            <h2 class="mt-5">#  
+                                <select 
+                                    v-model="question_type_id"
+                                    @change.prevent="getQuestions"
+                                    disabled
+                                >
+                                    <option 
+                                        v-for="type,index in question_types" 
 
-                                    :key="index"
-                                    :value="type.id"
-                                >
-                                    {{ type.name }}
-                                </option>
-                            </select>
-                        </h2>
-                        <div v-for="question,index in questions" :key="index">
-                            <template v-if="question.qresource && question.qresource.src">
-                                <video 
-                                    v-if="question.qresource.src && question.qresource.type_id == 1"
-                                    controls
-                                >
-                                    <source :src="`${apiUrl}/storage/${question.qresource.src}`" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video> 
-                                <audio 
-                                    v-if="question.qresource.src && question.qresource.type_id == 2"
-                                    controls
-                                >
-                                    <source :src="`${apiUrl}/storage/${question.qresource.src}`" type="audio/mpeg">
-                                    Your browser does not support the audio tag.
-                                </audio> 
-                                <center>
-                                    <img 
-                                        v-if="question.qresource.src && question.qresource.type_id == 3"
-                                        :src="`${apiUrl}/storage${question.qresource.src}`" 
-                                        class="card-img-top" 
-                                        style="max-width:400px"
+                                        :key="index"
+                                        :value="type.id"
                                     >
-                                </center>
-                            </template>
-                            <h3
-                                v-else-if="question.qresource && question.qresource.type_id == 4"
+                                        {{ type.name }}
+                                    </option>
+                                </select>
+                            </h2>
+                            <div v-for="question,index in questions" :key="index">
+                                <template v-if="question.qresource && question.qresource.src">
+                                    <video 
+                                        v-if="question.qresource.src && question.qresource.type_id == 1"
+                                        controls
+                                    >
+                                        <source :src="`${apiUrl}/storage/${question.qresource.src}`" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video> 
+                                    <audio 
+                                        v-if="question.qresource.src && question.qresource.type_id == 2"
+                                        controls
+                                    >
+                                        <source :src="`${apiUrl}/storage/${question.qresource.src}`" type="audio/mpeg">
+                                        Your browser does not support the audio tag.
+                                    </audio> 
+                                    <center>
+                                        <img 
+                                            v-if="question.qresource.src && question.qresource.type_id == 3"
+                                            :src="`${apiUrl}/storage${question.qresource.src}`" 
+                                            class="card-img-top" 
+                                            style="max-width:400px"
+                                        >
+                                    </center>
+                                </template>
+                                <h3
+                                    v-else-if="question.qresource && question.qresource.type_id == 4"
+                                >
+                                    {{question.qresource.text}}
+                                </h3>
+                                <h4 class="mt-4">{{ ++index }}. {{ question.question }}</h4>
+                                
+                                <template v-if="question_type_id == 5">
+                                    <audio-recorder
+                                        :upload-url="apiUrl+'/v1/student/'+student.id+'/exam/'+$route.params.exam_id+'/question/'+question.id+'/upload'"
+                                        :headers="{
+                                            Authorization: 'Bearer ' + token
+                                        }"
+                                        :attempts="3"
+                                        :time="2"
+                                    />
+                                </template>
+                                <template v-else-if="question_type_id == 6">
+                                    <input type="file" class="form-control form-control-sm" id="file" placeholder="File" @change="fileChanged">
+                                </template>
+                                <template v-else>
+                                    <p v-for="answer,index in question.answers" :key="index">
+                                        <label v-if="
+                                            answer.type_id == answerTypes.multipleChoice || 
+                                            answer.type_id == answerTypes.chooseCorrectOption ||
+                                            answer.type_id == answerTypes.fillGapsWithGivenWords ||
+                                            answer.type_id == answerTypes.matchQuestions ||
+                                            answer.type_id == answerTypes.completeTheSentencesWithArticles ||
+                                            answer.type_id == answerTypes.completeTheSentencesWithVerbs
+                                        ">
+                                            <input 
+                                                type="radio" 
+                                                v-model="question_answers[question.id]" 
+                                                :value="question.id + '_' + answer.id + '_' + answer.answer + '_' + answer.is_correct" 
+                                            /> {{ answer.answer }}
+                                        </label>
+                                        <label v-else-if="answer.type_id == answerTypes.gapFilling || answer.type_id == answerTypes.writeTheMissingLetters">
+                                            <input 
+                                                v-model="question_typed_correct_answers[question.id]"
+                                            /> 
+                                        </label>
+                                    </p>
+                                </template>
+                            </div>
+                            <button 
+                                v-if="question_type_id"
+                                class="btn bg-success text-white mt-3 mb-5"   
+                                @click.prevent="saveAnswers"
                             >
-                                {{question.qresource.text}}
-                            </h3>
-                            <h4 class="mt-4">{{ ++index }}. {{ question.question }}</h4>
-                            
-                            <template v-if="question_type_id == 5">
-                                <audio-recorder
-                                    :upload-url="apiUrl+'/v1/student/'+student.id+'/exam/'+$route.params.exam_id+'/question/'+question.id+'/upload'"
-                                    :headers="{
-                                        Authorization: 'Bearer ' + token
-                                    }"
-                                    :attempts="3"
-                                    :time="2"
-                                />
-                            </template>
-                            <template v-else-if="question_type_id == 6">
-                                <input type="file" class="form-control form-control-sm" id="file" placeholder="File" @change="fileChanged">
-                            </template>
-                            <template v-else>
-                                <p v-for="answer,index in question.answers" :key="index">
-                                    <label v-if="
-                                        answer.type_id == answerTypes.multipleChoice || 
-                                        answer.type_id == answerTypes.chooseCorrectOption ||
-                                        answer.type_id == answerTypes.fillGapsWithGivenWords ||
-                                        answer.type_id == answerTypes.matchQuestions ||
-                                        answer.type_id == answerTypes.completeTheSentencesWithArticles ||
-                                        answer.type_id == answerTypes.completeTheSentencesWithVerbs
-                                    ">
-                                        <input 
-                                            type="radio" 
-                                            v-model="question_answers[question.id]" 
-                                            :value="question.id + '_' + answer.id + '_' + answer.answer + '_' + answer.is_correct" 
-                                        /> {{ answer.answer }}
-                                    </label>
-                                    <label v-else-if="answer.type_id == answerTypes.gapFilling || answer.type_id == answerTypes.writeTheMissingLetters">
-                                        <input 
-                                            v-model="question_typed_correct_answers[question.id]"
-                                        /> 
-                                    </label>
-                                </p>
-                            </template>
-                        </div>
-                        <button 
-                            v-if="question_type_id"
-                            class="btn bg-success text-white mt-3 mb-5"   
-                            @click.prevent="saveAnswers"
-                        >
-                            <template v-if="question_type_id<6">
-                                Next
-                            </template>
-                            <template v-else>
-                                Save
-                            </template>
-                        </button>
+                                <template v-if="question_type_id<6">
+                                    Next
+                                </template>
+                                <template v-else>
+                                    Save
+                                </template>
+                            </button>
+                        </template>
                     </template>
                 </template>
             </div>
@@ -137,6 +192,7 @@ export default {
             },
             image: '',
             isLoading: '',
+            isQuestionLoading:false,
             student: '',
             questions: [],
             question_answers: [],
@@ -172,6 +228,7 @@ export default {
             await api.delete(`exam/${this.$route.params.exam_id}/results`);
         },
         async getQuestions(){
+            this.isQuestionsLoading = true; 
             let limit;
             switch(this.student.current_level){
                 case 'Beginner Mid':{
@@ -235,11 +292,12 @@ export default {
                 }
             })).data.data;
             // this.startTimer();
+            this.isQuestionsLoading = false; 
         },
         async getQuestionTypes(){
             this.question_types = (await api.get(`question-type`)).data.data;
         },
-        async saveAnswers(){ 
+        async saveAnswers(){
             if(this.questions.length){
                 let data = {
                     exam_id: this.$route.params.exam_id,
@@ -260,7 +318,7 @@ export default {
                 await api.post(`exam/${this.$route.params.exam_id}/set-finished`);  
                 alert("Quiz answers were succesfully saved!");
             }
-            this.getQuestions();
+            await this.getQuestions();
         },
         fileChanged(e){
             let fileReader = new FileReader();            
