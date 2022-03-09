@@ -2,7 +2,7 @@
     <main class="form-signin">
         <form @submit.prevent="signin">
             <img class="mb-4" src="../assets/logo.svg" alt="" height="100">
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <h1 class="h3 mb-3 fw-normal">{{ companyName }} <br /> Exams App</h1>
 
             <div class="form-floating">
                 <input 
@@ -65,6 +65,7 @@ import {mapState,mapGetters,mapActions} from 'vuex'
 export default {
     data(){
         return{
+            companyName: process.env.VUE_APP_COMPANY_NAME,
             credentials:{
                 phone: '',
                 password: ''
