@@ -29,7 +29,13 @@
 							<td>{{moment(group.exam_date).format("DD.MM.YYYY")}}</td>	
 							<td>
 								<a 
-									v-if="!group.generated_questions_count"
+									v-if="generateQuestionStore.state.isBuilding"
+									class="btn btn-success btn-sm disabled"
+								>
+									Generating exam questions. Please wait...
+								</a>
+								<a 
+									v-else-if="!group.generated_questions_count"
 									class="btn btn-success btn-sm"
 									href="#" 
 									@click.prevent="generateExamQuestions(group.id)"

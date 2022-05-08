@@ -3,6 +3,7 @@ import { reactive, readonly, computed } from '@vue/composition-api'
 
 const state = reactive({
     isLoading:false,
+    isBuilding:false,
     groups: [],
     group: {},
     students: [],
@@ -24,14 +25,14 @@ const methods = {
     },
 
     async generateQuestions(supervisor_group_id){
-        state.isLoading = true;
+        state.isBuilding = true;
         try {
             await generateQuestionApi.generateQuestions(supervisor_group_id);
         } 
         catch (error) {
             state.errors = error.response.data.errors;
         }
-        state.isLoading = false;  
+        state.isBuilding = false;  
     },
 
     async getSupervisorGroup(supervisor_group_id) {
