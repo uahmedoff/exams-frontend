@@ -180,6 +180,34 @@ const routes = [
       ] 
     },
     {
+      path: "/supervisor",
+      name: "SupervisorMain",
+      component: () => import("@/layouts/Main.vue"),
+      meta: {
+        requiresAuth: true,
+      },
+      children: [
+        {
+          path: "",
+          name: "SupervisorHome",
+          component: () =>
+            import("@/views/supervisor/Index.vue"),
+        },
+        {
+          path: "group/:id",
+          name: "SupervisorStudents",
+          component: () =>
+            import("@/views/supervisor/Students.vue"),
+        },
+        {
+          path: "student/:id/questions",
+          name: "SupervisorStudentsQuestions",
+          component: () =>
+            import("@/views/supervisor/Questions.vue"),
+        },
+      ]
+    },
+    {
       path: "/",
       name: "Main",
       component: () => import("@/layouts/Main.vue"),

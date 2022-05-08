@@ -164,5 +164,11 @@ export default {
           font-size: 3.5rem;
         }
       }
+
+      @media print{
+        .navbar{
+            display:none!important;
+        }       
+     }
     // @import '../styles/dashboard.css';
 </style>

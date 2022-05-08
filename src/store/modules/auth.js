@@ -43,6 +43,13 @@ const getters = {
             return getItem('user').role == roles.Assesser;   
         return null;
     },
+    isSupervisor: state => {
+        if(state.currentUser)
+            return state.currentUser.role == roles.Supervisor;
+        if(getItem('user'))
+            return getItem('user').role == roles.Supervisor;   
+        return null;
+    },
 };
 
 const mutations = {

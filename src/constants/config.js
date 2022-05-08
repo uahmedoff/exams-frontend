@@ -1,7 +1,8 @@
 export const roles = {
     Admin: 1,
     Invigilator: 2,
-    Assesser: 3
+    Assesser: 3,
+    Supervisor: 4
 }
 
 export const questionTypes = [
