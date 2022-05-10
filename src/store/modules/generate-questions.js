@@ -13,10 +13,10 @@ const state = reactive({
 })
 
 const methods = {
-    async getGroups() {
+    async getGroups(params) {
         state.isLoading = true;
         try {
-            state.groups = (await generateQuestionApi.getGroups()).data;
+            state.groups = (await generateQuestionApi.getGroups(params)).data;
         } 
         catch (error) {
             state.errors = error.response.data.errors;

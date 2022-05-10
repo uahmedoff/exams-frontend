@@ -3,6 +3,16 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h3 class="text-center mt-5 mb-3">Groups</h3>
+				
+				<b-form-datepicker 
+					id="date"
+					v-model="date" 
+					class="mb-2" 
+					@context="generateQuestionStore.methods.getGroups({
+			        	date: date
+			        })"
+				></b-form-datepicker>
+
 				<table class="table table-bordered table-condensed table-hover">
 					<thead>
 						<tr>
@@ -35,7 +45,7 @@
 									Generating exam questions. Please wait...
 								</a>
 								<a 
-									v-else-if="!group.generated_questions_count"
+									v-else-if="date == moment().format('YYYY-MM-DD') && !group.generated_questions_count"
 									class="btn btn-success btn-sm"
 									href="#" 
 									@click.prevent="generateExamQuestions(group.id)"
@@ -58,16 +68,21 @@
 		data(){
 			return {
 				moment,
-				generateQuestionStore
+				generateQuestionStore,
+				date: moment().format("YYYY-MM-DD")
 			}
 		},
 		mounted(){
-	        generateQuestionStore.methods.getGroups();
+	        generateQuestionStore.methods.getGroups({
+	        	date: this.date
+	        });
 	    },
 	    methods:{
 	    	async generateExamQuestions(group_id){
 	    		await generateQuestionStore.methods.generateQuestions(group_id);
-	    		await generateQuestionStore.methods.getGroups();		
+	    		await generateQuestionStore.methods.getGroups({
+		        	date: this.date
+		        });		
 	    	}
 	    }
 	}

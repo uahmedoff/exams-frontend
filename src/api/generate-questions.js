@@ -1,7 +1,11 @@
 import api from './axios'
 
-const getGroups = () => {
-    return api.get(`/generate-questions/groups`);
+const getGroups = (params) => {
+    return api.get(`/generate-questions/groups`,{
+        params:{
+            ...params
+        }
+    });
 }
 
 const generateQuestions = (supervisor_group_id) => {
