@@ -135,7 +135,8 @@ const routes = [
           path: "",
           name: "AssesserHome",
           component: () =>
-            import("@/views/assesser/Index.vue"),
+            // import("@/views/assesser/Index.vue"),
+            import("@/views/assesser/Exams.vue"),
         },
         {
           path: "exam/:exam_id",

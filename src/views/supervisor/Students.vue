@@ -9,8 +9,14 @@
 					-
 					{{ generateQuestionStore.state.group.level }}
 				</h3>
-				<router-link 
+				<!-- <router-link 
 					to="/supervisor" 
+					class="btn btn-secondary btn-sm mb-2 float-end no-print"
+				>
+					Back
+				</router-link> -->
+				<router-link 
+					to="/assesser" 
 					class="btn btn-secondary btn-sm mb-2 float-end no-print"
 				>
 					Back

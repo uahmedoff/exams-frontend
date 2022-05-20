@@ -8,10 +8,13 @@ const getGroups = (params) => {
     });
 }
 
+const getExamGroups = (branch_id,exam_date) => {
+    return api.get(`/generate-questions/exam-groups/branch/${branch_id}/exam-date/${exam_date}`);
+}
+
 const generateQuestions = (supervisor_group_id) => {
     return api.post(`/generate-questions/supervisor_group/${supervisor_group_id}/generate`);
 }
-
 
 const getSupervisorGroup = (supervisor_group_id) => {
     return api.get(`/generate-questions/supervisor_group/${supervisor_group_id}`);
@@ -31,6 +34,7 @@ const getStudentQuestions = (group_student_id) => {
 
 export default{
     getGroups,
+    getExamGroups,
     generateQuestions,
     getSupervisorGroup,
     getStudents,

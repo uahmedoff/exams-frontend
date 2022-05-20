@@ -24,6 +24,17 @@ const methods = {
         state.isLoading = false;
     },
 
+    async getExamGroups(branch_id,exam_date) {
+        state.isLoading = true;
+        try {
+            state.groups = (await generateQuestionApi.getExamGroups(branch_id,exam_date)).data;
+        } 
+        catch (error) {
+            state.errors = error.response.data.errors;
+        }
+        state.isLoading = false;
+    },
+
     async generateQuestions(supervisor_group_id){
         state.isBuilding = true;
         try {
