@@ -89,14 +89,14 @@
 
 <script>
 	import {store as generateQuestionStore} from '@/store/modules/generate-questions'
-	import {config} from '@/constants/config'
+	import {resourceTypes} from '@/constants/config'
 	import moment from 'moment'
 	export default{
 		data(){
 			return {
 				moment,
 				generateQuestionStore,
-				resourceTypes: config.resourceTypes
+				resourceTypes,
 			}
 		},
 		mounted(){
