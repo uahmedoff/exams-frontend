@@ -22,20 +22,27 @@
 					Back
 				</router-link>
 				
+				
 				<div style="clear:both"></div>
 
-				<ul>
-					<li 
-						v-for="student,index in generateQuestionStore.state.students" 
-						:key="'student'+index"
-					>
-						<router-link
-							:to="'/supervisor/student/'+student.id+'/questions'"
+				<div class="col-md-3">
+					<ul class="list-group">
+						<li 
+							v-for="student,index in generateQuestionStore.state.students" 
+							:key="'student'+index"
+							class="list-group-item"
 						>
-							{{ student.id }}		
-						</router-link>
-					</li>
-				</ul>
+							<span style="font-size:22px">Variant {{ student.id }}</span>			
+							<router-link
+								:to="'/supervisor/student/'+student.id+'/questions'"
+								class="btn btn-success btn-sm mb-1 float-end"
+							>
+								View
+							</router-link>
+						</li>
+					</ul>	
+				</div>
+				
 
 				<!-- <div
 					v-for="student,index in generateQuestionStore.state.students" 
