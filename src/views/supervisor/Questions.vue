@@ -1,9 +1,10 @@
 <template>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
 				<h3 class="text-center mt-5 mb-3">
-					{{ generateQuestionStore.state.student.student }}
+					#{{ generateQuestionStore.state.student.id }}
+					<input type="text" readonly />
 				</h3>
 				<router-link 
 					:to="prevRoute.path" 
@@ -27,12 +28,18 @@
 				  		question.question.qresource && 
 				  		question.question.qresource.type_id == resourceTypes.Text
 				  		"
+				  		class="qresource"
 				  	>
-				  		{{ question.question.qresource.text }}
+				  		{{ ++index }}.{{ question.question.qresource.text }}
 				  	</h4>
-				    <h5 class="card-title">{{ ++index }}. {{ question.question.question }}</h5>
+				    <h5 
+				    	class="card-title question"
+				    >
+						 <span v-if="!question.question.qresource">{{ ++index }}.</span> {{ question.question.question }}
+					</h5>
 				    <ol
 				    	type="A"
+				    	class="variants"
 				    >
 						<li 
 							v-for="answer,index in question.question.answers" 
@@ -74,7 +81,15 @@
 
 <style scoped>
 	.lightgreen{
-		background: lightgreen;
+		background: inherit;
+	}
+
+	.qresource, .question{
+		font-weight:bold;
+	}
+
+	.qresource, .question, .variants{
+		font-size:12px;
 	}
 
 	@media print{

@@ -24,7 +24,7 @@
 				
 				<div style="clear:both"></div>
 
-				<!-- <ul>
+				<ul>
 					<li 
 						v-for="student,index in generateQuestionStore.state.students" 
 						:key="'student'+index"
@@ -32,12 +32,12 @@
 						<router-link
 							:to="'/supervisor/student/'+student.id+'/questions'"
 						>
-							{{ student.student }}		
+							{{ student.id }}		
 						</router-link>
 					</li>
-				</ul> -->
+				</ul>
 
-				<div
+				<!-- <div
 					v-for="student,index in generateQuestionStore.state.students" 
 					:key="'student'+index"			
 				>
@@ -50,11 +50,7 @@
 								v-if="question.group_student_id == student.id"
 								class="card mt-3 mb-3"
 							>
-								<!-- <img 
-								  	src="..." 
-								  	class="card-img-top" 
-								  	alt="..."
-								> -->
+								
 								<div class="card-body">
 								  	<h4
 								  		v-if="
@@ -81,7 +77,7 @@
 						</div>
 					</div>
 					<hr class="mt-5 mb-5" />
-				</div>	
+				</div>	 -->
 			</div>
 		</div>		
 	</div>
