@@ -206,6 +206,12 @@ const routes = [
           component: () =>
             import("@/views/supervisor/Questions.vue"),
         },
+        {
+          path: "student/:id/answers",
+          name: "SupervisorStudentsAnswers",
+          component: () =>
+            import("@/views/supervisor/Answers.vue"),
+        },
       ]
     },
     {

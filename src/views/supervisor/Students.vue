@@ -34,11 +34,19 @@
 						>
 							<span style="font-size:22px">Variant {{ student.id }}</span>			
 							<router-link
+								:to="'/supervisor/student/'+student.id+'/answers'"
+								class="btn btn-warning btn-sm mb-1 float-end"
+							>
+								Answers
+							</router-link>
+							<router-link
 								:to="'/supervisor/student/'+student.id+'/questions'"
 								class="btn btn-success btn-sm mb-1 float-end"
+								style="margin-right:10px"
 							>
 								View
 							</router-link>
+							&nbsp;
 						</li>
 					</ul>	
 				</div>

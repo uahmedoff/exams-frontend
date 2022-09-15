@@ -2,10 +2,6 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<img src="/img/cbrnlogo.png" style="max-width:150px" class="float-end mt-3" alt="asdasd"> 
-				<br>
-				<br>
-				<br>
 				<h3 class="text-center mt-5 mb-3">
 					#{{ generateQuestionStore.state.student.id }}
 					<input type="text" readonly />
@@ -41,18 +37,18 @@
 				    >
 						 <span v-if="!question.question.qresource">{{ ++index }}.</span> {{ question.question.question }}
 					</h5>
-				    <ol
-				    	type="A"
+				    <ul
 				    	class="variants"
 				    >
 						<li 
 							v-for="answer,index in question.question.answers" 
 							:key="'asnwer'+index"
-							:class="{'lightgreen':answer.is_correct}"		
+							:class="{'lightgreen':answer.is_correct}"	
+                            v-if="answer.is_correct"	
 						>	
 							{{ answer.answer }}
 						</li>
-					</ol>
+					</ul>
 				  </div>
 				</div>
 			</div>		
