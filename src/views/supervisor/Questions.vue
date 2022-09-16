@@ -41,8 +41,7 @@
 				    >
 						 <span v-if="!question.question.qresource">{{ ++index }}.</span> {{ question.question.question }}
 					</h5>
-				    <ol
-				    	type="A"
+				    <ul
 				    	class="variants"
 				    >
 						<li 
@@ -52,7 +51,7 @@
 						>	
 							{{ answer.answer }}
 						</li>
-					</ol>
+					</ul>
 				  </div>
 				</div>
 			</div>		
