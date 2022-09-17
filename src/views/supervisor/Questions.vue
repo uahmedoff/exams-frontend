@@ -46,8 +46,7 @@
 						<div class="card-body">
 							<h4
 								v-if="
-								question.question.qresource && 
-								question.question.qresource.type_id == resourceTypes.Text
+									question.question.qresource 
 								"
 								class="qresource"
 							>
