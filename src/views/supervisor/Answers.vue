@@ -13,12 +13,14 @@
 					Back
 				</router-link>
 				<div style="clear:both"></div>
+				
 				<h4 class="text-uppercase">Reading questions:</h4>
 				<div 
 					v-for="question,index in generateQuestionStore.state.questions" :key="'question'+index"
 					class="card mt-1 mb-1"
+					v-if="question.question.type_id == 2"
 				>
-					<template v-if="question.question.type_id == 2">
+					<template>
 						<!-- <img 
 							src="..." 
 							class="card-img-top" 
@@ -27,11 +29,11 @@
 						<div class="card-body">
 							<h4
 								v-if="
-									question.question.qresource 
+									question.question.question_plan.qresource
 								"
 								class="qresource"
 							>
-								{{ question.question.qresource.text }}
+								{{ question.question.question_plan.qresource.text }}
 							</h4>
 							<h5 
 								class="card-title question"
@@ -44,8 +46,7 @@
 								<li 
 									v-for="answer,index in question.question.answers" 
 									:key="'asnwer'+index"
-									:class="{'lightgreen':answer.is_correct}"	
-									v-if="answer.is_correct"		
+									:class="{'lightgreen':answer.is_correct}"		
 								>	
 									{{ answer.answer }}
 								</li>
@@ -57,8 +58,12 @@
 				<div 
 					v-for="question,index in generateQuestionStore.state.questions" :key="'question'+index"
 					class="card mt-1 mb-1"
+					v-if="
+						question.question.type_id == 3 ||
+						question.question.type_id == 4
+					"
 				>
-					<template v-if="question.question.type_id == 3">
+					<template>
 						<!-- <img 
 							src="..." 
 							class="card-img-top" 
@@ -85,8 +90,7 @@
 								<li 
 									v-for="answer,index in question.question.answers" 
 									:key="'asnwer'+index"
-									:class="{'lightgreen':answer.is_correct}"	
-									v-if="answer.is_correct"		
+									:class="{'lightgreen':answer.is_correct}"		
 								>	
 									{{ answer.answer }}
 								</li>
@@ -98,8 +102,9 @@
 				<div 
 					v-for="question,index in generateQuestionStore.state.questions" :key="'question'+index"
 					class="card mt-1 mb-1"
+					v-if="question.question.type_id == 6"
 				>
-					<template v-if="question.question.type_id == 6">
+					<template>
 						<!-- <img 
 							src="..." 
 							class="card-img-top" 
@@ -126,8 +131,7 @@
 								<li 
 									v-for="answer,index in question.question.answers" 
 									:key="'asnwer'+index"
-									:class="{'lightgreen':answer.is_correct}"
-									v-if="answer.is_correct"			
+									:class="{'lightgreen':answer.is_correct}"		
 								>	
 									{{ answer.answer }}
 								</li>
@@ -139,8 +143,9 @@
 				<div 
 					v-for="question,index in generateQuestionStore.state.questions" :key="'question'+index"
 					class="card mt-1 mb-1"
+					v-if="question.question.type_id == 5"
 				>
-					<template v-if="question.question.type_id == 5">
+					<template>
 						<!-- <img 
 							src="..." 
 							class="card-img-top" 
@@ -167,8 +172,7 @@
 								<li 
 									v-for="answer,index in question.question.answers" 
 									:key="'asnwer'+index"
-									:class="{'lightgreen':answer.is_correct}"
-									v-if="answer.is_correct"			
+									:class="{'lightgreen':answer.is_correct}"		
 								>	
 									{{ answer.answer }}
 								</li>
