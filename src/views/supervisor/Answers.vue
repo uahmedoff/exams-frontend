@@ -13,43 +13,169 @@
 					Back
 				</router-link>
 				<div style="clear:both"></div>
+				<h4 class="text-uppercase">Reading questions:</h4>
 				<div 
 					v-for="question,index in generateQuestionStore.state.questions" :key="'question'+index"
 					class="card mt-1 mb-1"
 				>
-				  <!-- <img 
-				  	src="..." 
-				  	class="card-img-top" 
-				  	alt="..."
-				  > -->
-				  <div class="card-body">
-				  	<h4
-				  		v-if="
-				  		question.question.qresource && 
-				  		question.question.qresource.type_id == resourceTypes.Text
-				  		"
-				  		class="qresource"
-				  	>
-				  		{{ ++index }}.{{ question.question.qresource.text }}
-				  	</h4>
-				    <h5 
-				    	class="card-title question"
-				    >
-						 <span v-if="!question.question.qresource">{{ ++index }}.</span> {{ question.question.question }}
-					</h5>
-				    <ul
-				    	class="variants"
-				    >
-						<li 
-							v-for="answer,index in question.question.answers" 
-							:key="'asnwer'+index"
-							:class="{'lightgreen':answer.is_correct}"	
-                            v-if="answer.is_correct"	
-						>	
-							{{ answer.answer }}
-						</li>
-					</ul>
-				  </div>
+					<template v-if="question.question.type_id == 2">
+						<!-- <img 
+							src="..." 
+							class="card-img-top" 
+							alt="..."
+						> -->
+						<div class="card-body">
+							<h4
+								v-if="
+								question.question.qresource && 
+								question.question.qresource.type_id == resourceTypes.Text
+								"
+								class="qresource"
+							>
+								{{ question.question.qresource.text }}
+							</h4>
+							<h5 
+								class="card-title question"
+							>
+								<span v-if="!question.question.qresource">{{ ++index }}.</span> {{ question.question.question }}
+							</h5>
+							<ul
+								class="variants"
+							>
+								<li 
+									v-for="answer,index in question.question.answers" 
+									:key="'asnwer'+index"
+									:class="{'lightgreen':answer.is_correct}"	
+									v-if="answer.is_correct"		
+								>	
+									{{ answer.answer }}
+								</li>
+							</ul>
+						</div>
+					</template>
+				</div>
+				<h4 class="text-uppercase">Grammar questions:</h4>
+				<div 
+					v-for="question,index in generateQuestionStore.state.questions" :key="'question'+index"
+					class="card mt-1 mb-1"
+				>
+					<template v-if="question.question.type_id == 3">
+						<!-- <img 
+							src="..." 
+							class="card-img-top" 
+							alt="..."
+						> -->
+						<div class="card-body">
+							<h4
+								v-if="
+								question.question.qresource && 
+								question.question.qresource.type_id == resourceTypes.Text
+								"
+								class="qresource"
+							>
+								{{ question.question.qresource.text }}
+							</h4>
+							<h5 
+								class="card-title question"
+							>
+								<span v-if="!question.question.qresource">{{ ++index }}.</span> {{ question.question.question }}
+							</h5>
+							<ul
+								class="variants"
+							>
+								<li 
+									v-for="answer,index in question.question.answers" 
+									:key="'asnwer'+index"
+									:class="{'lightgreen':answer.is_correct}"	
+									v-if="answer.is_correct"		
+								>	
+									{{ answer.answer }}
+								</li>
+							</ul>
+						</div>
+					</template>
+				</div>
+				<h4 class="text-uppercase">Writing question:</h4>
+				<div 
+					v-for="question,index in generateQuestionStore.state.questions" :key="'question'+index"
+					class="card mt-1 mb-1"
+				>
+					<template v-if="question.question.type_id == 6">
+						<!-- <img 
+							src="..." 
+							class="card-img-top" 
+							alt="..."
+						> -->
+						<div class="card-body">
+							<h4
+								v-if="
+								question.question.qresource && 
+								question.question.qresource.type_id == resourceTypes.Text
+								"
+								class="qresource"
+							>
+								{{ question.question.qresource.text }}
+							</h4>
+							<h5 
+								class="card-title question"
+							>
+								<span v-if="!question.question.qresource">{{ ++index }}.</span> {{ question.question.question }}
+							</h5>
+							<ul
+								class="variants"
+							>
+								<li 
+									v-for="answer,index in question.question.answers" 
+									:key="'asnwer'+index"
+									:class="{'lightgreen':answer.is_correct}"
+									v-if="answer.is_correct"			
+								>	
+									{{ answer.answer }}
+								</li>
+							</ul>
+						</div>
+					</template>
+				</div>
+				<h4 class="text-uppercase">Speaking Presentation Topic:</h4>
+				<div 
+					v-for="question,index in generateQuestionStore.state.questions" :key="'question'+index"
+					class="card mt-1 mb-1"
+				>
+					<template v-if="question.question.type_id == 5">
+						<!-- <img 
+							src="..." 
+							class="card-img-top" 
+							alt="..."
+						> -->
+						<div class="card-body">
+							<h4
+								v-if="
+								question.question.qresource && 
+								question.question.qresource.type_id == resourceTypes.Text
+								"
+								class="qresource"
+							>
+								{{ question.question.qresource.text }}
+							</h4>
+							<h5 
+								class="card-title question"
+							>
+								<span v-if="!question.question.qresource">{{ ++index }}.</span> {{ question.question.question }}
+							</h5>
+							<ul
+								class="variants"
+							>
+								<li 
+									v-for="answer,index in question.question.answers" 
+									:key="'asnwer'+index"
+									:class="{'lightgreen':answer.is_correct}"
+									v-if="answer.is_correct"			
+								>	
+									{{ answer.answer }}
+								</li>
+							</ul>
+						</div>
+					</template>
 				</div>
 			</div>		
 		</div>

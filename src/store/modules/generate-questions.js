@@ -4,6 +4,7 @@ import { reactive, readonly, computed } from '@vue/composition-api'
 const state = reactive({
     isLoading:false,
     isBuilding:false,
+    generated_question: {},
     groups: [],
     group: {},
     students: [],
@@ -89,6 +90,17 @@ const methods = {
         }
         state.isLoading = false;
     },        
+
+    async getGeneratedQuestionSupervisorGroup(group_student_id) {
+        state.isLoading = true;
+        try {
+            state.generated_question = (await generateQuestionApi.getGeneratedQuestionSupervisorGroup(group_student_id)).data;
+        } 
+        catch (error) {
+            state.errors = error.response.data.errors;
+        }
+        state.isLoading = false;
+    }
 }
 
 const getters = {

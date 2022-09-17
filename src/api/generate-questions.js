@@ -32,6 +32,10 @@ const getStudentQuestions = (group_student_id) => {
     return api.get(`/generate-questions/group_student/${group_student_id}/questions`);
 }
 
+const getGeneratedQuestionSupervisorGroup = (group_student_id) => {
+    return api.get(`/generate-questions/group_student/${group_student_id}/supervisor-group`);
+}
+
 export default{
     getGroups,
     getExamGroups,
@@ -39,5 +43,6 @@ export default{
     getSupervisorGroup,
     getStudents,
     getStudent,
-    getStudentQuestions
+    getStudentQuestions,
+    getGeneratedQuestionSupervisorGroup
 }
