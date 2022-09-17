@@ -46,7 +46,8 @@
 								<li 
 									v-for="answer,index in question.question.answers" 
 									:key="'asnwer'+index"
-									:class="{'lightgreen':answer.is_correct}"		
+									:class="{'lightgreen':answer.is_correct}"	
+									v-if="answer.is_correct"				
 								>	
 									{{ answer.answer }}
 								</li>
@@ -90,7 +91,8 @@
 								<li 
 									v-for="answer,index in question.question.answers" 
 									:key="'asnwer'+index"
-									:class="{'lightgreen':answer.is_correct}"		
+									:class="{'lightgreen':answer.is_correct}"	
+									v-if="answer.is_correct"				
 								>	
 									{{ answer.answer }}
 								</li>
@@ -131,7 +133,8 @@
 								<li 
 									v-for="answer,index in question.question.answers" 
 									:key="'asnwer'+index"
-									:class="{'lightgreen':answer.is_correct}"		
+									:class="{'lightgreen':answer.is_correct}"	
+									v-if="answer.is_correct"				
 								>	
 									{{ answer.answer }}
 								</li>
@@ -173,6 +176,7 @@
 									v-for="answer,index in question.question.answers" 
 									:key="'asnwer'+index"
 									:class="{'lightgreen':answer.is_correct}"		
+									v-if="answer.is_correct"			
 								>	
 									{{ answer.answer }}
 								</li>
