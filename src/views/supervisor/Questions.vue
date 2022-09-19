@@ -1,5 +1,5 @@
 <template>
-	<div class="container-fluid">
+	<div class="container-fluid roboto">
 		<div class="row">
 			<div class="col-md-12">
 				<center><img src="/img/official-logo.png" class="mt-3" style="max-width:100%" alt="asdasd"></center>
@@ -230,6 +230,12 @@
 </script> 
 
 <style scoped>
+	@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+	.roboto{
+		font-family: 'Roboto Slab', serif;
+	}
+
 	.lightgreen{
 		background: inherit;
 	}
